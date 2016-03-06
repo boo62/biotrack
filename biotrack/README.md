@@ -42,6 +42,9 @@ Issues:
 - Information is spread across different databases and some of these (SubtiWiki)
   are species specific.
 
+- Will database stucture have changed between versions so that it is
+  difficult to compare? Merging of entries etc.
+
 - It is relatively easy to track changes to known components which we
   specify. How do we detect new components in a pathway? Could study pathway
   databases (KEGG). BioModels has Path2Models which automatically generates

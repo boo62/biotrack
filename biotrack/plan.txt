@@ -1,3 +1,19 @@
+1) Obtain new and old versions of UniProt database
+2) Work out how to obtain a field (or detect if it exists) for a given species.
+3) Is there an inbuilt way to detect whether a field has changed/been updated?
+4) Work out how to compare two fields
+5) Extract some test cases from them
+) Write some unittests
+
+
+Choose example species
+E. Coli - likely to have been in the database from the start but may
+not have had as many updates.
+B. Subtillis - As above and have some familiarity with it.
+S. Cerevisae - As above but with larger genome
+Homo Sapian - Has many proteins and likely to have had many updates.
+
+
 Things we know/specify
 - Organism
 - gene name

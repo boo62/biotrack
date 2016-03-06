@@ -1,6 +1,12 @@
+import unittest
+
 from py.test import *
 import biotrack
 
+
+class TestExample(unittest.TestCase):
+    def test_pass(self):
+        pass
 
 ## Ideas for unittests
 
@@ -18,8 +24,9 @@ import biotrack
 
 # The difference should be in the specified field.
 
-# An entry should not be found if it does not exist and should raise
-# an error.
+# An entry should not be found if it does not exist.
+
+# An field should found if it is added even if it is not in the previous version
 
 
 ## Ideas for testcases
