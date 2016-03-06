@@ -10,8 +10,7 @@ URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/"
 def write_entry(url, filename):
     with urllib.urlopen(URL + url) as handle:
         record1 = SwissProt.read(handle)
-        with open(filename, 'w') as f:
-            pass
+
 
 
 

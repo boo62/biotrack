@@ -1,6 +1,6 @@
 """Class for retrieving and comparing new and old model components."""
 import Bio
-
+import urllib
 
 # Could potentially hold the entries in a biopython object, presumably
 # one exists, rather than writing to file.
@@ -25,6 +25,8 @@ class Model(object):
 
         Write these to file for later comparison.
         """
+        # handle = urllib.urlopen("http://www.somelocation.org/data/someswissprotfile.dat")
+
         # with open(filename, 'a') as f:
         pass
 
