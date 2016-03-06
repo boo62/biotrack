@@ -1,4 +1,22 @@
-1) Obtain new and old versions of UniProt database
+1) Obtain new and old versions of UniProt database.
+
+There is a service for this called UniSave RESTful Web-Services. You
+can give an accession and a version number and it fectches that
+version, e.g.,
+
+http://www.ebi.ac.uk/uniprot/unisave/rest/raw/P94465/79
+
+will fetch accession P94465 (ribR B. Subtilis) version 79. It can also
+get all versions or just a certain range. Not sure how to get just a
+versions and the most recent if you don't know the most recent
+number. Perhaps from the main website.
+
+ribR (B. Subtilis, P94465) has 97 entry versions
+sonic hedgehod (homo sapians, Q15465) has 189 entry versions
+
+The website also does a nice comparison with the information that I
+need so I should see if biopython or something else has this.
+
 2) Work out how to obtain a field (or detect if it exists) for a given species.
 3) Is there an inbuilt way to detect whether a field has changed/been updated?
 4) Work out how to compare two fields
@@ -9,7 +27,8 @@
 Choose example species
 E. Coli - likely to have been in the database from the start but may
 not have had as many updates.
-B. Subtillis - As above and have some familiarity with it.
+B. Subtilis - As above and have some familiarity with it.
+I know of the recent ribR function update.
 S. Cerevisae - As above but with larger genome
 Homo Sapian - Has many proteins and likely to have had many updates.
 
