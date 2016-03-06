@@ -1,0 +1,44 @@
+Things we know/specify
+- Organism
+- gene name
+- ideally an accession
+
+Things to track:
+Function - e.g. unknown for ribT in subtiwiki
+http://subtiwiki.uni-goettingen.de/bank/index.php?gene=ribT
+
+Expression and Regulation
+SubtiWiki has a good section on this. e.g. for ribR
+http://subtiwiki.uni-goettingen.de/bank/index.php?gene=ribR&action=Go
+SubtiWiki also has a references section which could also be tracked
+with the assumption that no new information will be added without a
+new reference.
+
+Rate constant
+Availible for some enzymes in UniProt
+
+
+Use of models:
+
+BioModels:
+- 591 manually curated models
+- 877 non curated models
+- over 100,000 automatically generated models from pathway resources
+(Path2Models)
+
+Examples of non-curated models in BioModels:
+
+Publication ID: 18846089
+A consensus yeast metabolic network reconstruction obtained from a
+community approach to systems biology.
+Submission Date: 12 Aug 2009 11:19:28 UTC
+Last Modification Date: 03 Feb 2012 13:12:17 UTC
+Creation Date: 20 Feb 2008 10:05:10 UTC
+
+Publication ID: 18687109
+The genome-scale metabolic model iIN800 of Saccharomyces cerevisiae
+and its validation: a scaffold to query lipid metabolism.
+Submission Date: 24 Feb 2010 16:17:04 UTC
+Last Modification Date: 03 Feb 2012 13:20:03 UTC
+Creation Date: 10 Feb 2009 10:05:10 UTC
+
