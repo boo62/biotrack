@@ -1,7 +1,3 @@
-from py.test import *
-import biotrack
-
-
 ## Ideas for unittests
 
 # Comparison should be between the same species
