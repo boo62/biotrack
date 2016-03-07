@@ -25,18 +25,15 @@ from biotrack.component import AutoComponent
 
 
 # Pickle all of the test case Models.
-def pickle_models(model_path):
+def pickle_models(path_pairs):
     """Pickle test case Model objects from paths of test cases.
 
-    Requires a list of paths to model '.csv' files and writes
-    '_pickle.txt' files to the same directory for each model.
+    Requires a list of tuples containing paths to model '.csv'
+    files and '_pickle.txt' files to write to.
     """
-    for path in model_path:
-        # Could use regex here.
-        pickle_path = path.split(".csv")[0] + "_pickle.txt"
-        # Model contains accessions and new and old UniProt entries
-        # for each component in the '.csv' file.
-        pickle_model(Model(path), pickle_path)
+    for paths in path_pairs:
+        # Create model from paths[0] and write pickle to paths[1].
+        pickle_model(Model(paths[0]), paths[1])
 
 
 def pickle_model(model, filename):
@@ -50,12 +47,16 @@ def pickle_model(model, filename):
 # Pickle some AutoComponents to use as test cases
 def pickle_auto_components(components):
     for component in components:
-        outfile = MODEL_DIR + component.accession + "_ac_pickle.txt"
+        outfile = PICKLE_DIR + component.accession + "_ac_pickle.txt"
         with open(outfile, 'w') as f:
             pickle.dump(component, f)    
 
-# Path of directory containing models. This is relative to this files path.
-MODEL_DIR = os.path.dirname(os.path.realpath(__name__)) + "/example_models/"
+# Path of directory containing models and directory to contain pickled
+# test cases.
+
+TEST_DIR = os.path.dirname(os.path.realpath(__name__))
+MODEL_DIR = TEST_DIR + "/example_models/"
+PICKLE_DIR = TEST_DIR + "/pickled_testcases/"
 
 # Names of model.csv files
 TEST_CASE_MODELS = [
@@ -65,7 +66,9 @@ TEST_CASE_MODELS = [
 
 # Paths to test case models '.csv' files.
 TEST_CASE_MODEL_PATHS = [MODEL_DIR + model for model in TEST_CASE_MODELS]
-
+PICKLE_PATHS = [PICKLE_DIR + model.split(".csv")[0] + "_pickle.txt"
+                 for model in TEST_CASE_MODELS]
+MODEL_PATHS = zip(TEST_CASE_MODEL_PATHS, PICKLE_PATHS)
 
 # ribR and ribE in B. Subtilis
 TEST_CASE_AUTOCOMPONENTS = [
@@ -76,7 +79,7 @@ TEST_CASE_AUTOCOMPONENTS = [
 # Pickle all of the test cases.
 if __name__ == "__main__":
     print ("Start pickling test cases")
-    pickle_models(TEST_CASE_MODEL_PATHS)
+    pickle_models(MODEL_PATHS)
     print ("Done")
     print ("Start pickling auto component test cases")
     pickle_auto_components(TEST_CASE_AUTOCOMPONENTS)
