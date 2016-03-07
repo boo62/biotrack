@@ -52,6 +52,13 @@ class Model(object):
         return new_entries
 
     
+    def same_accessions(self):
+        """Determine whether any components are the same.
+
+        I.e. if both accessions appear in the same UniProt entry.
+        """
+        pass
+        
     def compare_entries(self, field):
         """Find differeces in a field between new and old entries."""
         pass

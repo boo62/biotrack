@@ -32,8 +32,8 @@ record1 = SwissProt.read(handle1)
 #print record.features
 #print record.taxonomy_id
 print record1.accessions
-for comment in record1.comments:
-    print comment
+#for comment in record1.comments:
+#    print comment
 # could match FUNCTION: with a regular expression
     
     #print record.comments[0]
