@@ -8,19 +8,23 @@ import urllib
 # doing all of the initial setup.
 class Model(object):
     """Class containing model components, versions, and accessions."""
-    def __init__(self, new_filename, old_filename):
-        # self.components = self.parse_accessions(filename)
-        # self.new_entries = self.fetch_new_entries(new_filename)
-        # self.old_entries = self.fetch_old_entries(old_filename)
-        pass
+    def __init__(self, filename):
+        self.components = self.parse_accessions(filename)
+        # self.new_entries = self.fetch_new_entries()
+        # self.old_entries = self.fetch_old_entries()
+        self.OLD_URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/{0}/{1}"
+        self.NEW_URL = "http://www.uniprot.org/uniprot/{0}.txt"
 
     
     def parse_accessions(self, filename):
         """Read in a list of UniProt accessions with entry versions."""
-        pass
+        with open(filename, 'r') as f:
+            component_reader = csv.reader(f, delimeter=",")
+            components = [(row[0], row[1]) for row in component_reader]
+            return components
 
 
-    def fetch_old_entries(self, filename):
+    def fetch_old_entries(self):
         """Obtain the past UniProt entries of model components.
 
         Write these to file for later comparison.
@@ -31,7 +35,7 @@ class Model(object):
         pass
 
 
-    def fetch_new_entries(self, filename):
+    def fetch_new_entries(self):
         """Obtain the present UniProt entries of model components.
 
         Write these to file for later comparison.

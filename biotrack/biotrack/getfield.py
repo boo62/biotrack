@@ -10,8 +10,7 @@ URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/"
 def write_entry(url, filename):
     with urllib.urlopen(URL + url) as handle:
         record1 = SwissProt.read(handle)
-        with open(filename, 'w') as f:
-            pass
+
 
 
 
@@ -21,8 +20,11 @@ url_new = "P94465/97"
 
 url_ribE_new = "P16440/126"
 url_new_ribE = "http://www.uniprot.org/uniprot/P16440.txt"
+# p53 is not an enzyme and has functional annotations in the same place Record.comments
+# There is a very long list so a diff is necesssary to determine what is new and what is not.
+p53 = "http://www.uniprot.org/uniprot/P04637.txt"
 
-handle1 = urllib.urlopen(url_new_ribE)
+handle1 = urllib.urlopen(p53)
 record1 = SwissProt.read(handle1)
 
 #print record.annotation_update
