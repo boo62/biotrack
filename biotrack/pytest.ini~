@@ -1,0 +1,6 @@
+# Initailise pytests to exclude slow tests where Models are 
+# initialised from urls.
+[pytest]
+# Ignores test with Model instatiation.
+# Instead use tests with pickled models.
+addopts = --ignore=tests/test_model.py

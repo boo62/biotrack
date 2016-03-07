@@ -26,7 +26,8 @@ def pickle_test_cases(model_path):
     '_pickle.txt' files to the same directory for each model.
     """
     for path in model_path:
-        pickle_path = path.rstrip(".csv") + "_pickle.txt"
+        # Could use regex here.
+        pickle_path = path.split(".csv")[0] + "_pickle.txt"
         # Model contains accessions and new and old UniProt entries
         # for each component in the '.csv' file.
         pickle_test_case(Model(path), pickle_path)
