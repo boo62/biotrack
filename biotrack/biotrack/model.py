@@ -42,8 +42,7 @@ class Model(object):
         """
         with open(filename, 'r') as f:
             component_reader = csv.reader(f, skipinitialspace=True)
-        components = [AutoComponent(row[0], row[1]) for row in
-                      component_reader]
+            components = [AutoComponent(row[0], row[1]) for row in component_reader]
         return components
 
         

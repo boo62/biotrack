@@ -33,6 +33,7 @@ def pickle_models(path_pairs):
     """
     for paths in path_pairs:
         # Create model from paths[0] and write pickle to paths[1].
+        print paths[0]
         pickle_model(Model(paths[0]), paths[1])
 
 
