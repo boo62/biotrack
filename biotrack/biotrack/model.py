@@ -1,6 +1,7 @@
 """Class for retrieving and comparing new and old model components."""
 import Bio
 import urllib
+import csv
 
 # Could potentially hold the entries in a biopython object, presumably
 # one exists, rather than writing to file.
@@ -19,7 +20,7 @@ class Model(object):
     def parse_accessions(self, filename):
         """Read in a list of UniProt accessions with entry versions."""
         with open(filename, 'r') as f:
-            component_reader = csv.reader(f, delimeter=",")
+            component_reader = csv.reader(f)
             components = [(row[0], row[1]) for row in component_reader]
             return components
 
