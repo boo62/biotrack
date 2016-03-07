@@ -17,7 +17,7 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
         self.model_1 = None
 
 
-    def test_component_lengths(self):
+    def test_components_length(self):
         """Test component lenghts.
 
         The correct number of components should be read from file and
@@ -25,8 +25,7 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
 
         """
         self.assertEqual(len(self.model_1.components), 2)
-        for component in self.model_1.components:
-            self.assertEqual(len(component), 2)
+
 
 
     def test_component_types(self):

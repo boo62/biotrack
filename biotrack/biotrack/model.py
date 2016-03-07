@@ -8,6 +8,11 @@ from component import Component
 
 class Model(object):
     """Class containing model components and UniProt entries."""
+    # Class variables. Make sure that these are always mutable or
+    # start as None.
+    # Url templates for obtaining past and present UniProt entries.
+    OLD_URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/{0}/{1}"
+    NEW_URL = "http://www.uniprot.org/uniprot/{0}.txt"
 
     def __init__(self, filename):
         """Parse model from file and collect new and old UniProt entries.
@@ -17,11 +22,7 @@ class Model(object):
         where ... are any number of other fields, for instance protein
         name, which are ignored by the parser.
         """
-        # Urls for obtaining entries. Could be kept as class variables
-        # instead.
-        self.OLD_URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/{0}/{1}"
-        self.NEW_URL = "http://www.uniprot.org/uniprot/{0}.txt"
-        # List of (accession, version) tuples for each component.
+        # List of model Component objects
         self.components = self.parse_accessions(filename)
         # Lists of SwissProt.Record objects
         self.old_entries = self.fetch_old_entries()
