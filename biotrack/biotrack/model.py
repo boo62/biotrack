@@ -1,5 +1,5 @@
 """Class for retrieving and comparing new and old model components."""
-import Bio
+from Bio import SwissProt
 import urllib
 import csv
 
@@ -15,12 +15,13 @@ class Model(object):
         # self.old_entries = self.fetch_old_entries()
         self.OLD_URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/{0}/{1}"
         self.NEW_URL = "http://www.uniprot.org/uniprot/{0}.txt"
+        self.old_records = self.fetch_old_entries()
 
     
     def parse_accessions(self, filename):
         """Read in a list of UniProt accessions with entry versions."""
         with open(filename, 'r') as f:
-            component_reader = csv.reader(f)
+            component_reader = csv.reader(f, skipinitialspace=True)
             components = [(row[0], row[1]) for row in component_reader]
             return components
 
@@ -30,10 +31,11 @@ class Model(object):
 
         Write these to file for later comparison.
         """
-        # handle = urllib.urlopen("http://www.somelocation.org/data/someswissprotfile.dat")
-
-        # with open(filename, 'a') as f:
-        pass
+        old_records = []
+        for comp in self.components:
+            handle = urllib.urlopen(self.OLD_URL.format(comp[0], comp[1]))
+            old_records.append(SwissProt.read(handle))
+        return old_records
 
 
     def fetch_new_entries(self):

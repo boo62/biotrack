@@ -6,7 +6,7 @@ from biotrack.model import Model
 
 
 
-class TestBasicTwoComponentModel(unittest.TestCase):
+class TestBasicTwoComponentModelParsing(unittest.TestCase):
 
     def setUp(self):
         """Setup simple model from two component test case."""
@@ -44,6 +44,28 @@ class TestBasicTwoComponentModel(unittest.TestCase):
             self.assertRegexpMatches(component[0], uniprot_accession)
             self.assertIsInstance(int(component[1]), int)
 
-            
+    def test_no_white_space(self):
+        pass
+        
     def test_accession_parsing_fail_when_not_accession(self):
+        pass
+
+
+class TestBasicTwoComponentModelEntryRetrieval(unittest.TestCase):
+
+    def setUp(self):
+        """Setup simple model from two component test case."""
+        test_dir = os.path.dirname(os.path.realpath(__file__))
+        self.model_1 = Model(test_dir + "/example_models/two_components.csv")
+
+    def tearDown(self):
+        self.model_1 = None
+
+    def test_records_lenght(self):
+        self.assertEqual(len(self.model_1.old_records), 2)
+        
+    def test_old_entry_retrieval(self):
+        pass
+
+    def test_new_entry_retrieval(self):
         pass
