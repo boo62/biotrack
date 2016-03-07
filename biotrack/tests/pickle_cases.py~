@@ -1,0 +1,6 @@
+# It is slow to obtain entry data from a url every time. I only need
+# to do this when I change a method which affects model insantiation. I
+# can pickle some test cases and load these in order to test new
+# methods which do not affect the instantiation.
+# If I change the instantiation I will need to repickle the test cases.
+# 
