@@ -1,6 +1,8 @@
 # Component class
 import re, urllib
+
 from Bio import SwissProt
+
 
 class Component(object):
 
