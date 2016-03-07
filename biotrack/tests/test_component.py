@@ -83,7 +83,8 @@ class TestAutoComponent(unittest.TestCase):
         # things. Second argument must be callable so can't just write
         # Component("N0TAPR0T", "79") and must give an instance of a
         # Component to __init__ so use auto_comp. If I raise the error in
-        # component.py then the unittest raises the error and fails.
+        # component.py then the unittest raises the error and
+        # fails. Instead I have to handle it?
         self.assertRaises(ValueError,
                           Component.__init__(self.auto_comp, "N0TAPR0T", "79"))
 

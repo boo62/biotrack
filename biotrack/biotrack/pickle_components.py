@@ -16,6 +16,7 @@ import os
 import pickle
 
 from biotrack.model import Model
+from biotrack.component import AutoComponent
 
 
 # Pickle all of the test case Models.
@@ -40,6 +41,11 @@ def pickle_test_model(model, filename):
     with open(filename, 'w') as f:
         pickle.dump(model, f)
 
+def pickle_test_components(compnents, filename):
+    for component in components:
+        outfile = MODEL_DIR + component.accession + "_ac_pickle.txt"
+        with open(outfile) as f:
+            pickle.dump(component, f)    
 
         
 # Path of directory containing models. This is relative to this files path.
@@ -51,11 +57,20 @@ TEST_CASE_MODELS = [
     "two_components.csv",
     ]
 
+# ribR and ribE in B. Subtilis
+TEST_CASE_AUTOCOMPONENTS = [
+    AutoComponent("P94465", "79"),
+    AutoComponent("P16440", "90")
+    ]
+
 # Paths to test case models '.csv' files.
 TEST_CASE_PATHS = [MODEL_DIR + model for model in TEST_CASE_MODELS]
 
 # Pickle all of the test cases.
 if __name__ == "__main__":
-    print ("Start pickling test cases")
+    print ("Start pickling Model test cases")
     pickle_test_models(TEST_CASE_PATHS)
+    print ("Done")
+    print ("Start pickling AutoComponent test cases")
+    pickle_test_auto_components(TEST_CASE_AUTOCOMPONENTS)
     print ("Done")

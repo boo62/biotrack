@@ -15,7 +15,7 @@
 import os
 import pickle
 
-from biotrack.model import Model
+from biotrack.model import Component
 
 
 # Pickle all of the test case Models.
@@ -40,6 +40,9 @@ def pickle_test_model(model, filename):
     with open(filename, 'w') as f:
         pickle.dump(model, f)
 
+def pickle_test_components(compnent, filename):
+    
+    pass
 
         
 # Path of directory containing models. This is relative to this files path.
@@ -49,6 +52,10 @@ MODEL_DIR = os.path.dirname(os.path.realpath(__name__)) + "/example_models/"
 TEST_CASE_MODELS = [
     "one_component.csv"
     "two_components.csv",
+    ]
+
+TEST_CASE_AUTOCOMPONENTS = [
+    AutoCo"P94465", two_components.csv"
     ]
 
 # Paths to test case models '.csv' files.
