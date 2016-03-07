@@ -1,5 +1,6 @@
 # Component class
 import re, urllib
+from Bio import SwissProt
 
 class Component(object):
 
@@ -59,7 +60,34 @@ class Component(object):
                                has_old, has_new)
 
     def fetch_old_entry(self):
-        handle = urllib.urlopen(cls.OLD_URL.format(comp.accession, comp.version))
-        self.old_entries.append(SwissProt.read(handle))
- 
+        handle = urllib.urlopen(self.OLD_URL.format(self.accession, self.version))
+        return SwissProt.read(handle)
+
+    def fetch_new_entry(self):
+        handle = urllib.urlopen(self.NEW_URL.format(self.accession))
+        return SwissProt.read(handle)
         
+ 
+
+# A Component subclass which automatically retrieves UniProt Entries
+# on instantiation.
+class AutoComponent(Component):
+
+    def __init__(self, accession, version):
+        # Accession should be in Uniprot format.
+        try:
+            assert (re.match(self.UNIPROT_ACCESSION, accession) is not None)
+            self.accession = str(accession)
+        except AssertionError:
+            template = "Accession '{}' not in UniProt format."
+            print(template.format(accession))
+        # Version should be an integer or string representation of an
+        # integer.
+        try:
+            int(str(version))
+            self.version = str(version)
+        except ValueError:
+            print("Version '{}' is not an integer.".format(version))
+        # Fetch the UniProt entries on instantiation
+        self.old_entry = self.fetch_old_entry()
+        self.new_entry = self.fetch_new_entry()
