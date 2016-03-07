@@ -3,19 +3,27 @@ from Bio import SwissProt
 import urllib
 import csv
 
-# Could potentially hold the entries in a biopython object, presumably
-# one exists, rather than writing to file.
-# Could probably also retreive only the relevent field rather than
-# doing all of the initial setup.
+
 class Model(object):
-    """Class containing model components, versions, and accessions."""
+    """Class containing model components and UniProt entries."""
+
     def __init__(self, filename):
-        self.components = self.parse_accessions(filename)
-        # self.new_entries = self.fetch_new_entries()
-        # self.old_entries = self.fetch_old_entries()
+        """Parse model from file and collect new and old UniProt entries.
+
+        The file should be .csv fromat:
+        UniProt_accession, entry_version, ...
+        where ... are any number of other fields, for instance protein
+        name, which are ignored by the parser.
+        """
+        # Urls for obtaining entries. Could be kept as class variables
+        # instead.
         self.OLD_URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/{0}/{1}"
         self.NEW_URL = "http://www.uniprot.org/uniprot/{0}.txt"
-        self.old_records = self.fetch_old_entries()
+        # List of (accession, version) tuples for each component.
+        self.components = self.parse_accessions(filename)
+        # Lists of SwissProt.Record objects
+        self.old_entries = self.fetch_old_entries()
+        self.new_entries = self.fetch_new_entries()
 
     
     def parse_accessions(self, filename):
@@ -27,24 +35,21 @@ class Model(object):
 
 
     def fetch_old_entries(self):
-        """Obtain the past UniProt entries of model components.
-
-        Write these to file for later comparison.
-        """
-        old_records = []
+        """Obtain the past UniProt entries of model components."""
+        old_entries = []
         for comp in self.components:
             handle = urllib.urlopen(self.OLD_URL.format(comp[0], comp[1]))
-            old_records.append(SwissProt.read(handle))
-        return old_records
+            old_entries.append(SwissProt.read(handle))
+        return old_entries
 
 
     def fetch_new_entries(self):
-        """Obtain the present UniProt entries of model components.
-
-        Write these to file for later comparison.
-        """
-        # with open(filename, 'a') as f:
-        pass
+        """Obtain the present UniProt entries of model components."""
+        new_entries = []
+        for comp in self.components:
+            handle = urllib.urlopen(self.NEW_URL.format(comp[0]))
+            new_entries.append(SwissProt.read(handle))
+        return new_entries
 
     
     def compare_entries(self, field):
@@ -52,3 +57,14 @@ class Model(object):
         pass
 
 
+    def compare_entry_comments(self, old_record, new_record):
+        old_comments = old_record.comments
+        print old_comments[0]
+        new_comments = new_record.comments
+        print new_comments[0]
+
+
+if __name__ == "__main__":
+    model_1 = Model("../tests/example_models/two_components.csv")
+    model_1.compare_entry_comments(model_1.old_entries[0],
+                                   model_1.new_entries[0])
