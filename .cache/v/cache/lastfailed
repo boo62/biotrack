@@ -1,4 +1,8 @@
 {
   "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_component_types": true, 
-  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_no_white_space": true
+  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_no_white_space": true, 
+  "biotrack/tests/test_pickled_models.py::TestBasicTwoComponentModelEntryRetrieval::test_entries_have_the_expected_accession": true, 
+  "biotrack/tests/test_pickled_models.py::TestBasicTwoComponentModelParsing::test_component_lengths": true, 
+  "biotrack/tests/test_pickled_models.py::TestBasicTwoComponentModelParsing::test_component_types": true, 
+  "biotrack/tests/test_pickled_models.py::TestBasicTwoComponentModelParsing::test_no_white_space": true
 }

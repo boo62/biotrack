@@ -1,5 +1,6 @@
 import unittest
 import os
+import pickle
 
 from biotrack.component import Component, AutoComponent
 
@@ -48,12 +49,17 @@ class TestComponentAttributes(unittest.TestCase):
 
 
         
-# Either make this pickle or move it to a slower test file.            
+# Tests on a pickled AutoComponent test case.
 class TestAutoComponent(unittest.TestCase):
     """Contains additional test for entries"""
 
     def setUp(self):
-        self.auto_comp = AutoComponent("P94465", "79")
+        """Load a pickled AutoComponent as a test case."""
+        pickle_dir = (os.path.dirname(os.path.realpath(__file__))
+                      + "/example_models/")
+        with open(pickle_dir + "P94465_ac_pickle.txt", 'r') as f:
+            self.auto_comp = pickle.load(f)
+        # self.auto_comp = AutoComponent("P94465", "79")
 
         
     def tearDown(self):
@@ -66,7 +72,7 @@ class TestAutoComponent(unittest.TestCase):
         self.assertEqual(self.auto_comp.version, "79")
 
 
-    def test_component_attribure_types(self):
+    def test_component_attribute_types(self):
         self.assertIsInstance(self.auto_comp.accession, str)
         self.assertIsInstance(self.auto_comp.version, str)
         self.assertIsInstance(int(self.auto_comp.version), int)
