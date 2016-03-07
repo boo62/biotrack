@@ -12,16 +12,20 @@ class Component(object):
                          "[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}")
 
     def __init__(self, accession, version):
+        # Accession should be in Uniprot format.
         try:
             assert (re.match(self.UNIPROT_ACCESSION, accession) is not None)
             self.accession = str(accession)
         except AssertionError:
-            template = "Accession {} not in UniProt format."
+            template = "Accession '{}' not in UniProt format."
+            print(template.format(accession))
+        # Version should be an integer or string representation of an
+        # integer.
         try:
-            self.version = str(int(version))
-        except TypeError:
-            print("Version {} does not convert to int.".format(version))
-            raise
+            int(str(version))
+            self.version = str(version)
+        except ValueError:
+            print("Version '{}' is not an integer.".format(version))
         self.old_entry = None
         self.new_entry = None
 

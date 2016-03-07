@@ -1,3 +1,1 @@
-{
-  "tests/test_component.py::TestEntryRetrieval::test_non_uniprot_accession_raises_value_error": true
-}
+{}

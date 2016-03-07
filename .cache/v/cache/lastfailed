@@ -1,1 +1,4 @@
-{}
+{
+  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_component_types": true, 
+  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_no_white_space": true
+}
