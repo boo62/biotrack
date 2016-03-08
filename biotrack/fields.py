@@ -1,8 +1,6 @@
-# Fields object to hold the comments section of a Bio.UniProt.Record
+# Fields object to hold the comments section of a Bio.SwissProt.Record
 # object in more convenient and manipulatable data structures. Parses
 # comments as field_set and field_dict attributes of Fields. 
-
-import re
 
 
 class Fields(object):
@@ -65,6 +63,13 @@ class Fields(object):
             dif.field_dict = new_field_dict
             return dif
 
+    
     def __str__(self):
-        pass
+        """Return string representation of Fields object."""
+        str_list = []
+        for field, value in self.field_dict.iteritems():
+            str_list.append(field + ": " + value)
+        str_list.sort()
+        return "\n".join(str_list)
+            
         

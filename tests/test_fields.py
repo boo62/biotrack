@@ -9,7 +9,7 @@ from biotrack.fields import Fields
 class TestVeryBasicFieldsValues(unittest.TestCase):
 
     def setUp(self):
-        comments = [
+        self.comments = [
             "FUNCTION: Lays eggs. {ECO:0000269|PubMed:6766130}.",
             "SIMILARITY: Goose. {ECO:0000255|PROSITE-ProRule:PRU00524}.",
             ]
@@ -17,7 +17,7 @@ class TestVeryBasicFieldsValues(unittest.TestCase):
             "FUNCTION": "Lays eggs. {ECO:0000269|PubMed:6766130}.",
             "SIMILARITY": "Goose. {ECO:0000255|PROSITE-ProRule:PRU00524}.",
             }
-        self.fields = Fields(comments)
+        self.fields = Fields(self.comments)
 
         
     def tearDown(self):
@@ -30,6 +30,13 @@ class TestVeryBasicFieldsValues(unittest.TestCase):
         
     def test_basic_field_dict_values(self):
         self.assertDictEqual(self.test_dict, self.fields.field_dict)
+
+
+    def test_print(self):
+        """Test string representation of Fields object."""
+        sorted_comments = sorted(self.comments)
+        self.assertEqual(str(self.fields), "\n".join(sorted_comments))
+                                        
 
 
 class TestRibRProteinFieldsValues(unittest.TestCase):

@@ -56,7 +56,12 @@ class Component(object):
                 print ("Not comparing from new lists of accessions. "
                        "Instead compare self.accession")
                 return self.accession == comp2.accession
-        
+
+
+    # Greater than of equal based on version number or data. 
+    def __ge__(self, comp2):
+        pass
+    
 
     def __str__(self):
         """Return string representation of Component object.
@@ -70,10 +75,12 @@ class Component(object):
         return template.format(self.accession, self.version,
                                has_old, has_new)
 
+    
     def fetch_old_entry(self):
         handle = urllib.urlopen(self.OLD_URL.format(self.accession, self.version))
         return SwissProt.read(handle)
 
+    
     def fetch_new_entry(self):
         handle = urllib.urlopen(self.NEW_URL.format(self.accession))
         return SwissProt.read(handle)

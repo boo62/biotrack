@@ -25,17 +25,32 @@ url_new_ribE = "http://www.uniprot.org/uniprot/P16440.txt"
 p53 = "http://www.uniprot.org/uniprot/P04637.txt"
 
 #handle1 = urllib.urlopen(URL + url_ribE_new)
-handle1 = urllib.urlopen(p53)
-record1 = SwissProt.read(handle1)
+print "old"
+handle_old = urllib.urlopen(URL + url_old)
+record_old = SwissProt.read(handle_old)
+print type(record_old)
+print record_old.created
+print record_old.sequence_update
+print record_old.annotation_update
+
+print "new"
+handle_new = urllib.urlopen(URL + url_new)
+record_new = SwissProt.read(handle_new)
+print type(record_new)
+print record_new.created
+print record_new.sequence_update
+print record_new.annotation_update
+
+print record_new.comments
 
 #print record.annotation_update
 #print record.description
 #print record.features
 #print record.taxonomy_id
-print record1.accessions
+#print record1.accessions
 
-for comment in record1.comments:
-   print comment
+# for comment in record1.comments:
+#    print comment
 #could match FUNCTION: with a regular expression
     
     #print record.comments[0]
