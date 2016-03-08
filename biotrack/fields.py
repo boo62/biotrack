@@ -26,3 +26,10 @@ class Fields(object):
         fields = [comment[0] for comment in comments]
         return set(fields), dict(comments)
         
+
+    # Compare if the fields of two Fields are equal.
+    # Sets are dicts are both equal.
+    def __eq__(self, fields2):
+        sets_equal = (self.field_set == fields2.field_set)
+        dicts_equal = (self.field_dict == fields2.field_dict)
+        return sets_equal and dicts_equal
