@@ -25,7 +25,9 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
             self.component_test_tuples = [(row[0], row[1]) for row in
                                           component_reader]
 
-
+    # Easier to comment and uncomment setUps as required rather than
+    # adding all new tests to two separate files. Could just test the
+    # initial setup in the slower test file though.
     # # Unpickled setUp (slower)
     # def setUp(self):
     #     model_path = (os.path.dirname(os.path.realpath(__file__)) +
