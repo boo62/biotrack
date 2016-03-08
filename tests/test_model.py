@@ -8,38 +8,44 @@ from biotrack.model import Model
 
 
 class TestBasicTwoComponentModelParsing(unittest.TestCase):
-
-    # def setUp(self):
-    #     """Setup simple model from two component test case."""
-    #     pickle_dir = (os.path.dirname(os.path.realpath(__file__))
-    #                   + "/example_models/")
-    #     with open(pickle_dir + "two_components_pickle.txt") as f:
-    #         self.model_1 = pickle.load(f)
-
+    
+    # Pickled setUp (faster)
     def setUp(self):
-        model_path = (os.path.dirname(os.path.realpath(__file__)) +
-                       "/example_models/two_components.csv")
-        self.model_1 = Model(model_path)
-        with open(model_path, 'r') as f:
+        """Setup simple model from two component test case."""
+        # Paths to find pickled Model and raw model file.
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        pickle_path = (test_path + "/pickled_testcases/two_components_pickle.txt")
+        model_path = (test_path + "/example_models/two_components.csv")
+        # Load pickled Model test cases.
+        with open(pickle_path) as f:
+            self.model_1 = pickle.load(f)
+        # Read values used to create test case Model from file.
+        with open(model_path) as f:
             component_reader = csv.reader(f, skipinitialspace=True)
-            self.component_test_tuples = [(row[0], row[1]) for row in component_reader]
-        
+            self.component_test_tuples = [(row[0], row[1]) for row in
+                                          component_reader]
+
+
+    # # Unpickled setUp (slower)
+    # def setUp(self):
+    #     model_path = (os.path.dirname(os.path.realpath(__file__)) +
+    #                    "/example_models/two_components.csv")
+    #     # Create a test case model.
+    #     self.model_1 = Model(model_path)
+    #     # Read values used to create test case Model from file.
+    #     with open(model_path, 'r') as f:
+    #         component_reader = csv.reader(f, skipinitialspace=True)
+    #         self.component_test_tuples = [(row[0], row[1]) for row in component_reader]
 
             
     def tearDown(self):
         self.model_1 = None
 
 
-    def test_component_lengths(self):
-        """Test component lenghts.
-
-        The correct number of components should be read from file and
-        each component should have length two.
-
-        """
+    def test_components_length(self):
+        """Test length of Component object list in Model"""
         self.assertEqual(len(self.model_1.components), 2)
-       # for component in self.model_1.components:
-        #    self.assertEqual(len(component), 2)
+
 
     def test_model_components_have_correct_entries(self):
         for component in zip(self.component_test_tuples,
