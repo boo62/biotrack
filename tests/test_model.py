@@ -2,6 +2,7 @@
 import unittest
 import os
 import pickle
+import csv
 
 from biotrack.model import Model
 
@@ -19,6 +20,10 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
         model_path = (os.path.dirname(os.path.realpath(__file__)) +
                        "/example_models/two_components.csv")
         self.model_1 = Model(model_path)
+        with open(model_path, 'r') as f:
+            component_reader = csv.reader(f, skipinitialspace=True)
+            self.component_test_tuples = [(row[0], row[1]) for row in component_reader]
+        
 
             
     def tearDown(self):
@@ -36,12 +41,16 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
        # for component in self.model_1.components:
         #    self.assertEqual(len(component), 2)
 
-    def test_model_components_have_entries(self):
-        for component in self.model_1.components:
-            self.assertTrue(component.old_entry.accessions)
-            self.assertTrue(component.new_entry.accessions)
-            
-
+    def test_model_components_have_correct_entries(self):
+        for component in zip(self.component_test_tuples,
+                             self.model_1.components):
+            # Test new and old entries exist and have accessions.
+            self.assertTrue(component[1].old_entry.accessions)
+            self.assertTrue(component[1].new_entry.accessions)
+            # Test accessions match those read from file.
+            self.assertTrue(component[0][0] in component[1].old_entry.accessions)
+            self.assertTrue(component[0][0] in component[1].new_entry.accessions)
+                            
 #     def test_component_types(self):
 #         """Test that Model.components have correct type and format.
 
