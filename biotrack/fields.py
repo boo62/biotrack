@@ -10,8 +10,12 @@ class Fields(object):
         # to Components.
         # Fields as a dictionary (or nested dictionary).
         # split(s, sep=":", maxsplit=1)
-        pass
+        fields = parse_comments(comments)
+        self.field_set = fields[0]
+        self.field_dict = fields[1]
 
-
-    def parse_comments(self):
-        pass
+    def parse_comments(self, comments):
+        comments = [split(comment, sep=":", maxsplit=1) for comment in comments]
+        fields = [str.lower(comment[0]) for comment in comments]
+        return set(fields), dict(comments)
+        
