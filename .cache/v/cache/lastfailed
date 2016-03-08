@@ -1,14 +1,1 @@
-{
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelEntryCommentComparison::test_entry_comment_comparison": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelEntryRetrieval::test_entries_length": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelEntryRetrieval::test_new_entry_retrieval": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelEntryRetrieval::test_old_entry_retrieval": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelParsing::test_accession_parsing_fail_when_not_accession": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelParsing::test_component_types": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelParsing::test_components_length": true, 
-  "biotrack/tests/not_in_use/test_model_slow.py::TestBasicTwoComponentModelParsing::test_no_white_space": true, 
-  "biotrack/tests/test_model.py::TestBasicTwoComponentModelEntryRetrieval::test_entries_have_the_expected_accession": true, 
-  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_component_lengths": true, 
-  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_component_types": true, 
-  "biotrack/tests/test_model.py::TestBasicTwoComponentModelParsing::test_no_white_space": true
-}
+{}
