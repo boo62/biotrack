@@ -27,7 +27,9 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
 
     # Easier to comment and uncomment setUps as required rather than
     # adding all new tests to two separate files. Could just test the
-    # initial setup in the slower test file though.
+    # initial setup in the slower test file though. Do this after I
+    # have finnished edditing so heavily to test things like obtaining
+    # entries from urls (when version does not exist etc.).
     # # Unpickled setUp (slower)
     # def setUp(self):
     #     model_path = (os.path.dirname(os.path.realpath(__file__)) +
