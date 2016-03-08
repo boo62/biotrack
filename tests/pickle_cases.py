@@ -33,7 +33,7 @@ def pickle_models(path_pairs):
     """
     for paths in path_pairs:
         # Create model from paths[0] and write pickle to paths[1].
-        print paths[0]
+        print(paths[0])
         pickle_model(Model(paths[0]), paths[1])
 
 
@@ -48,14 +48,17 @@ def pickle_model(model, filename):
 # Pickle some AutoComponents to use as test cases
 def pickle_auto_components(components):
     for component in components:
+        print(component)
         outfile = PICKLE_DIR + component.accession + "_ac_pickle.txt"
         with open(outfile, 'w') as f:
             pickle.dump(component, f)    
 
 # Path of directory containing models and directory to contain pickled
 # test cases.
-
-TEST_DIR = os.path.dirname(os.path.realpath(__name__))
+# Get odd behaviour when running this as C-c C-l rather than from terminal.
+# To work that way it requires changing __file__ to __name__ but then it
+# does not find the correct path from the terminal. Can always use compile.
+TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 MODEL_DIR = TEST_DIR + "/example_models/"
 PICKLE_DIR = TEST_DIR + "/pickled_testcases/"
 
