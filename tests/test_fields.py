@@ -71,3 +71,13 @@ class TestRibRProteinFieldsValues(unittest.TestCase):
         for field in field_dict.keys():
             self.assertIsInstance(field_dict[field], str)
             self.assertEqual(field_dict[field], str.strip(field_dict[field]))
+
+
+    def test_fields_equality(self):
+        # Fields are equal if their field_sets and field_dicts are
+        # equal.
+        old_fields1 = Fields(self.old_comments)
+        old_fields2 = Fields(self.old_comments)
+        new_fields = Fields(self.new_comments)
+        self.assertEqual(old_fields1, old_fields2)
+        self.assertNotEqual(new_fields, old_fields1)
