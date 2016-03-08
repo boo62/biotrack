@@ -60,6 +60,8 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
             # Test accessions match those read from file.
             self.assertTrue(component[0][0] in component[1].old_entry.accessions)
             self.assertTrue(component[0][0] in component[1].new_entry.accessions)
+
+
                             
 #     def test_component_types(self):
 #         """Test that Model.components have correct type and format.

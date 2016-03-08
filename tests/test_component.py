@@ -3,6 +3,7 @@ import os
 import pickle
 
 from biotrack.component import Component, AutoComponent
+from biotrack.fields import Fields
 
 
 class TestComponentAttributes(unittest.TestCase):
@@ -107,3 +108,9 @@ class TestAutoComponent(unittest.TestCase):
         self.assertTrue(self.auto_comp.accession in self.auto_comp.old_entry.accessions)
         self.assertTrue(self.auto_comp.accession in self.auto_comp.new_entry.accessions)
 
+
+    def test_fields_object_based_comparison(self):
+        # Also need a test case where old and new are the same to test
+        # that None is returned.
+        changes = self.auto_comp.compare_entry_fields()
+        self.assertIsInstance(changes, Fields)

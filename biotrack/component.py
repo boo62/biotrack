@@ -3,6 +3,8 @@ import re, urllib
 
 from Bio import SwissProt
 
+from biotrack.fields import Fields
+
 
 class Component(object):
 
@@ -38,10 +40,19 @@ class Component(object):
         old = self.old_entry.comments
         new = self.new_entry.comments
 
+
+    # Using Fields objects.
+    def compare_entry_fields(self):
+        """Return Fields object containing changes."""
+        old = Fields(self.old_entry.comments)
+        new = Fields(self.new_entry.comments)
+        return new - old
+        
     # Like this or create a Comments class?
     def parse_comments(self, entry):
         pass
-        
+
+    
     def __eq__(self, comp2):
         """Two components are equal if their accessions are
         equivalent."""
