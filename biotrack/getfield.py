@@ -24,6 +24,7 @@ url_new_ribE = "http://www.uniprot.org/uniprot/P16440.txt"
 # There is a very long list so a diff is necesssary to determine what is new and what is not.
 p53 = "http://www.uniprot.org/uniprot/P04637.txt"
 
+#handle1 = urllib.urlopen(URL + url_ribE_new)
 handle1 = urllib.urlopen(p53)
 record1 = SwissProt.read(handle1)
 
@@ -32,9 +33,10 @@ record1 = SwissProt.read(handle1)
 #print record.features
 #print record.taxonomy_id
 print record1.accessions
-#for comment in record1.comments:
-#    print comment
-# could match FUNCTION: with a regular expression
+
+for comment in record1.comments:
+   print comment
+#could match FUNCTION: with a regular expression
     
     #print record.comments[0]
 #print("hello")
