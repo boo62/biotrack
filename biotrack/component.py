@@ -32,6 +32,15 @@ class Component(object):
         self.old_entry = None
         self.new_entry = None
 
+    
+    # Compare the comment sections of the new and old entries.
+    def compare_entries(self, field=None):
+        old = self.old_entry.comments
+        new = self.new_entry.comments
+
+    # Like this or create a Comments class?
+    def parse_comments(self, entry):
+        pass
         
     def __eq__(self, comp2):
         """Two components are equal if their accessions are
