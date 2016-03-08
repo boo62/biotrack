@@ -36,7 +36,7 @@ class TestRibRProteinFieldsValues(unittest.TestCase):
 
     def setUp(self):
         """Load a pickled AutoComponent as a test case."""
-        # Test on the comments field of a UniProt entry of a pickled
+        # Test on the comments field of a SwissProt entry of a pickled
         # AutoComponent test case.
         PICKLE_DIR = (os.path.dirname(os.path.realpath(__file__))
                       + "/pickled_testcases/")
@@ -81,3 +81,51 @@ class TestRibRProteinFieldsValues(unittest.TestCase):
         new_fields = Fields(self.new_comments)
         self.assertEqual(old_fields1, old_fields2)
         self.assertNotEqual(new_fields, old_fields1)
+
+
+class TestDifferentFieldDiscovery(unittest.TestCase):
+
+    def setUp(self):
+        self.comments1 = [
+            "FUNCTION: Lays eggs. {ECO:0000269|PubMed:6766130}.",
+            "SIMILARITY: Goose. {ECO:0000255|PROSITE-ProRule:PRU00524}.",
+            ]
+        # Second comments with differect object reference.
+        self.comments2 = list(self.comments1)
+        self.fields1 = Fields(self.comments1)
+
+        
+    def tearDown(self):
+        self.fields1 = None
+        self.comments1 = None
+        self.comments2 = None
+
+        
+    def test_new_field_is_discovered(self):
+        # Add an extra comment taking care not to alter
+        # self.comments1.
+        new_field = "MISCELLANEOUS: Has feathers."
+        self.comments2.append(new_field)
+        # New Fields with additional comment.
+        fields2 = Fields(self.comments2)
+        # Test equality
+        self.assertNotEqual(self.fields1, fields2)
+        # Test difference returns new Field object containing
+        # the new field.
+        diff = fields2 - self.fields1
+        self.assertEqual(diff, Fields([new_field]))
+
+        
+    def test_changed_field_is_discovered(self):
+        # Change a field in comment2 taking care not to alter comments1.
+        self.comments2[0] = "FUNCTION: Stud duck."
+        # Create second Fields with altered FUNCTION.
+        fields2 = Fields(self.comments2)
+        # Test that values FUNCTION value has changed but set has not.
+        self.assertSetEqual(self.fields1.field_set, fields2.field_set)
+        self.assertNotEqual(self.fields1, fields2)
+        self.assertNotEqual(self.fields1.field_dict["FUNCTION"],
+                            fields2.field_dict["FUNCTION"])
+        # Test that new FUNCTION is detected and returned
+        diff = fields2 - self.fields1
+        self.assertEqual(diff, Fields(["FUNCTION: Stud duck."])) 
