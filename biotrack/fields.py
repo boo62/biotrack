@@ -67,6 +67,7 @@ class Fields(object):
     def __str__(self):
         """Return string representation of Fields object."""
         str_list = []
+        # Should test if attributes exist.
         for field, value in self.field_dict.iteritems():
             str_list.append(field + ": " + value)
         str_list.sort()
