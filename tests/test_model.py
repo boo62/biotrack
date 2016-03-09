@@ -115,11 +115,17 @@ class TestSameProteinDifferentAccessions(unittest.TestCase):
                             {p53_3.accession})
 
         
-    def test_retrieve_entries_of_same_protein(self):
+    def test_retrieve_accessions_of_same_protein(self):
         """Test discovery of accessions which refer to the same protein."""
-        # Order should not matter.
-        same = [("P04637", "Q15086", "Q9UQ61")]
-        self.assertEqual(self.model.same_accessions(), same)
+        same = [{"P04637", "Q15086", "Q9UQ61"}]
+        self.assertEqual(self.model.compare_accessions(group_as="accs"), same)
+
+
+    def test_retrieve_components_of_same_protein(self):
+        """Test discovery of accessions which refer to the same protein."""
+        same = [set(self.model.components[2:])]
+        self.assertEqual(self.model.compare_accessions(group_as="comps"), same)
+    
     
     
 #     def test_component_types(self):

@@ -24,6 +24,7 @@ class Component(object):
         except AssertionError:
             template = "Accession '{}' not in UniProt format."
             print(template.format(accession))
+            self.accession = str(accession)
         # Version should be an integer or string representation of an
         # integer.
         try:
@@ -60,10 +61,10 @@ class Component(object):
         # it is worth doing them all
         try:
             return self.accession in comp2.new_entry.accessions
-        except TypeError:
+        except AttributeError:
             try:
                 return comp2.accession in self.new_entry.accessions
-            except TypeError:
+            except AttributeError:
                 print ("Not comparing from new lists of accessions. "
                        "Instead compare self.accession")
                 return self.accession == comp2.accession

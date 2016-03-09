@@ -1,6 +1,7 @@
 """Class for retrieving and comparing new and old model components."""
 import urllib
 import csv
+import itertools
 
 from Bio import SwissProt
 
@@ -46,27 +47,36 @@ class Model(object):
         return components
 
         
-    def same_accessions(self):
+    def compare_accessions(self, group_as="comps"):
         """Determine whether any components are the same.
 
-        I.e. If accessions give the same protein.
+        Group components whose accessions refer to the same
+        protein. Groups are returned as list of sets of Component
+        objects. Returns an empty list if no groups are present.
+
         """
-        sames = []
-        comp_set = set(self.components)
-        acc_set = set([comp.accession for comp in comp_set])
-        if len(comp_set) == len(self.components):
-            return None
-        else:
-            # for comp in self.components:
-            #     if comp not in comp_set:
-            #         return
-            for comp in comp_set:
-                same = filter(__eq__, self.components)
-                if len(same) >= 2:
-                    sames.append(tuple(same))
-        return "poo"
-        same = [comp for comp in self.components]
-  
+        # Store components that have already been grouped.
+        grouped = []
+        # Groups of Component objects.
+        groups = []
+        # Groups of Component accessions.
+        group_accs = []
+        for comp in self.components:
+            if comp not in grouped:
+                group = filter(comp.__eq__, self.components)
+                # Do not want matches to self.
+                if len(group) >= 2:
+                    grouped += group
+                    accessions = [comp.accession for comp in group]
+                    # Group of component accessions.
+                    group_accs.append(set(accessions))
+                    # Group of Component objects.
+                    groups.append(set(group))
+        if group_as == "accs":
+            return group_accs
+        elif group_as == "comps":
+            return groups
+        
         
     def compare_entries(self):
         """Find differeces in a field between new and old entries."""
