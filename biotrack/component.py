@@ -115,7 +115,7 @@ class AutoComponent(Component):
     """Component subclass which retrieves UniProt entries on instantiation."""
 
     def __init__(self, accession, version):
-        # Call Component (super)  __init__
+        # Call Component (super)  __init__.
         super(AutoComponent, self).__init__(accession, version)
         # Fetch the UniProt entries on instantiation
         self.old_entry = self.fetch_old_entry()

@@ -53,6 +53,7 @@ def pickle_auto_components(components):
         with open(outfile, 'w') as f:
             pickle.dump(component, f)    
 
+
 # Path of directory containing models and directory to contain pickled
 # test cases.
 # Get odd behaviour when running this as C-c C-l rather than from terminal.
@@ -61,6 +62,7 @@ def pickle_auto_components(components):
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
 MODEL_DIR = TEST_DIR + "/example_models/"
 PICKLE_DIR = TEST_DIR + "/pickled_testcases/"
+
 
 # Names of model.csv files
 TEST_CASE_MODELS = [
@@ -80,17 +82,20 @@ TEST_CASE_MODELS = [
     "two_groups_same_protein.csv"
     ]
 
+
 # Paths to test case models '.csv' files.
 TEST_CASE_MODEL_PATHS = [MODEL_DIR + model for model in TEST_CASE_MODELS]
 PICKLE_PATHS = [PICKLE_DIR + model.split(".csv")[0] + "_pickle.txt"
                  for model in TEST_CASE_MODELS]
 MODEL_PATHS = zip(TEST_CASE_MODEL_PATHS, PICKLE_PATHS)
 
+
 # ribR and ribE in B. Subtilis
 TEST_CASE_AUTOCOMPONENTS = [
     AutoComponent("P94465", "79"),
     AutoComponent("P16440", "90"),
     ]
+
 
 # Pickle all of the test cases.
 if __name__ == "__main__":
