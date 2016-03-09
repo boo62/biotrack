@@ -115,20 +115,8 @@ class AutoComponent(Component):
     """Component subclass which retrieves UniProt entries on instantiation."""
 
     def __init__(self, accession, version):
-        # Accession should be in Uniprot format.
-        try:
-            assert (re.match(self.UNIPROT_ACCESSION, accession) is not None)
-            self.accession = str(accession)
-        except AssertionError:
-            template = "Accession '{}' not in UniProt format."
-            print(template.format(accession))
-        # Version should be an integer or string representation of an
-        # integer.
-        try:
-            int(str(version))
-            self.version = str(version)
-        except ValueError:
-            print("Version '{}' is not an integer.".format(version))
+        # Call Component (super)  __init__
+        super(AutoComponent, self).__init__(accession, version)
         # Fetch the UniProt entries on instantiation
         self.old_entry = self.fetch_old_entry()
         self.new_entry = self.fetch_new_entry()
