@@ -22,8 +22,8 @@ class Model(object):
         have the following attributes:
         accession
         version
-        old_entry (Bio.UniProt.Record)
-        new_entry (Bio.UniProt.Record)
+        old_entry (Bio.SwissProt.Record)
+        new_entry (Bio.SwissProt.Record)
         
         The past and most recent UniProt entries are retrieved
         automatically through AutoComponent instantiation.
@@ -51,7 +51,21 @@ class Model(object):
 
         I.e. If accessions give the same protein.
         """
-        pass
+        sames = []
+        comp_set = set(self.components)
+        acc_set = set([comp.accession for comp in comp_set])
+        if len(comp_set) == len(self.components):
+            return None
+        else:
+            # for comp in self.components:
+            #     if comp not in comp_set:
+            #         return
+            for comp in comp_set:
+                same = filter(__eq__, self.components)
+                if len(same) >= 2:
+                    sames.append(tuple(same))              
+        same = [comp for comp in self.components]
+  
         
     def compare_entries(self):
         """Find differeces in a field between new and old entries."""

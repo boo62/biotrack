@@ -69,7 +69,7 @@ class Component(object):
                 return self.accession == comp2.accession
 
 
-    # Greater than of equal based on version number or data. 
+    # Greater than of equal based on version number or date. 
     def __ge__(self, comp2):
         pass
     
