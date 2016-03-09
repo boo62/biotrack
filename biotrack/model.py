@@ -47,8 +47,8 @@ class Model(object):
         return components
 
         
-    def group_accessions(self, group_as="comps"):
-        """Determine whether any components are the same.
+    def group_accessions(self):
+        """Return set of Components of the same protein.
 
         Group components whose accessions refer to the same
         protein. Groups are returned as list of sets of Component
@@ -59,23 +59,15 @@ class Model(object):
         grouped = []
         # Groups of Component objects.
         groups = []
-        # Groups of Component accessions.
-        group_accs = []
         for comp in self.components:
             if comp not in grouped:
+                # Group of Component objects.
                 group = filter(comp.__eq__, self.components)
                 # Do not want matches to self.
                 if len(group) >= 2:
                     grouped += group
-                    accessions = [comp.accession for comp in group]
-                    # Group of component accessions.
-                    group_accs.append(set(accessions))
-                    # Group of Component objects.
                     groups.append(set(group))
-        if group_as == "accs":
-            return group_accs
-        elif group_as == "comps":
-            return groups
+        return groups
         
         
     def compare_entries(self):

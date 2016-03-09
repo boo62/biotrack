@@ -110,16 +110,10 @@ class TestSameProteinDifferentAccessions(unittest.TestCase):
         self.assertIn(p53_3.accession, set(p53_1.new_entry.accessions))
 
         
-    def test_grouping_of_accessions_of_same_protein(self):
-        """Test discovery of accessions which refer to the same protein."""
-        same = [{"P04637", "Q15086", "Q9UQ61"}]
-        self.assertEqual(self.model.group_accessions(group_as="accs"), same)
-
-
     def test_grouping_of_components_of_same_protein(self):
         """Test discovery of accessions which refer to the same protein."""
-        same = [set(self.model.components[2:])]
-        self.assertEqual(self.model.group_accessions(group_as="comps"), same)
+        same = [set(self.model.components[2:5])]
+        self.assertEqual(self.model.group_accessions(), same)
     
     
 class TestTwoGroupsSameProtein(unittest.TestCase):
@@ -178,16 +172,11 @@ class TestTwoGroupsSameProtein(unittest.TestCase):
         self.assertIn(rhod_2.accession, set(rhod_1.new_entry.accessions))
 
         
-    def test_grouping_of_accessions_of_same_protein(self):
-        """Test discovery of accessions which refer to the same protein."""
-        same = [{"P04637", "Q15086", "Q9UQ61"}, {"P08100", "Q16414"}]
-        self.assertEqual(self.model.group_accessions(group_as="accs"), same)
-
 
     def test_grouping_of_components_of_same_protein(self):
         """Test discovery of accessions which refer to the same protein."""
         same = [set(self.model.components[2:5]), set(self.model.components[5:7])]
-        self.assertEqual(self.model.group_accessions(group_as="comps"), same)
+        self.assertEqual(self.model.group_accessions(), same)
 
 
 #     def test_component_types(self):
