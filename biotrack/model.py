@@ -47,7 +47,7 @@ class Model(object):
         return components
 
         
-    def compare_accessions(self, group_as="comps"):
+    def group_accessions(self, group_as="comps"):
         """Determine whether any components are the same.
 
         Group components whose accessions refer to the same
