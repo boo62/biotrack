@@ -42,8 +42,16 @@ class Component(object):
     
     
     def __eq__(self, comp2):
-        """Two components are equal if their accessions are
-        equivalent."""
+        """Test equivalance of Components by accession.
+
+        Return True if both Components accessions refer to the same
+        protein. Otherwise return False.
+
+        Try first to compare accessions in most recent UniProt entries
+        (new_entry attributes). If neither component has a new_entry
+        attribute compare accession attributes and print a warning.
+
+        """
         # There a several more possible permutaions here. Not sure if
         # it is worth doing them all
         try:

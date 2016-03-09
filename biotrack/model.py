@@ -8,7 +8,7 @@ from biotrack.component import AutoComponent
 
 
 class Model(object):
-    """Class containing model components and UniProt entries."""
+    """Class containing model Components and UniProt entries."""
 
     def __init__(self, filename):
         """Parse model from file and collect new and old UniProt entries.
@@ -96,7 +96,28 @@ class Model(object):
     
 
     # Should change or create new methods which use GO terms and difflib.
-    def compare_entries(self, *fields):
+    def compare_entries(self):
+        """Find differeces in a field between new and old entries.
+
+        Returns a Fields object containing new and altered fields in
+        the comments sections of the Components new_entry and old_entry
+        attributes.
+
+        """
+        for component in self.components:
+            acc = component.accession
+            name = component.new_entry.gene_name
+            changes = component.compare_entry_fields()
+            print acc
+            print name
+            print changes
+
+
+    # Modify compare_entries method to take optional fields
+    # arguments. If no fields given compare all. Return None if field
+    # does not exist in either record.
+    # Should change or create new methods which use GO terms and difflib.
+    def compare_fields(self, *fields):
         """Find differeces in a field between new and old entries."""
         for component in self.components:
             acc = component.accession
