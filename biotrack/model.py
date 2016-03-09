@@ -15,11 +15,11 @@ class Model(object):
 
         The file should be in .csv format:
         UniProt_accession, entry_version, ...
-        where ... are any number of other fields, for instance protein
-        name, which are ignored by the parser.
+        where ... are any number of other fields (e.g. protein
+        name) which are ignored by the parser.
 
-        Components are stored as a list of AutoComponent objects which
-        have the following attributes:
+        Components are stored in the components attribute as a list
+        of AutoComponent objects with the following attributes:
         accession
         version
         old_entry (Bio.SwissProt.Record)

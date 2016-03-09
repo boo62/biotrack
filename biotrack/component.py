@@ -31,6 +31,7 @@ class Component(object):
         # Version should be an integer or string representation of an
         # integer.
         try:
+            # Cannot int the str of a float.
             int(str(version))
             self.version = str(version)
         except ValueError:
@@ -39,20 +40,6 @@ class Component(object):
         self.new_entry = None
 
     
-    # Compare SwissProt.Record comments using Fields objects.
-    def compare_entry_fields(self):
-        """Return Fields object containing changes."""
-        old = Fields(self.old_entry.comments)
-        new = Fields(self.new_entry.comments)
-        return new - old
-    
-        
-    # Do diff between a field in new and old entries.
-    def diff_field(self, field):
-        # old = self.old_entry.comments
-        # new = self.new_entry.comments
-        pass
-
     
     def __eq__(self, comp2):
         """Two components are equal if their accessions are
@@ -69,11 +56,6 @@ class Component(object):
                        "Instead compare self.accession")
                 return self.accession == comp2.accession
 
-
-    # Greater than of equal based on version number or date. 
-    def __ge__(self, comp2):
-        pass
-    
 
     def __str__(self):
         """Return string representation of Component object.
@@ -97,7 +79,26 @@ class Component(object):
     def fetch_new_entry(self):
         handle = urllib.urlopen(self.NEW_URL.format(self.accession))
         return SwissProt.read(handle)
+
+
+    # Compare SwissProt.Record comments using Fields objects.
+    def compare_entry_fields(self):
+        """Return Fields object containing changes."""
+        old = Fields(self.old_entry.comments)
+        new = Fields(self.new_entry.comments)
+        return new - old
+    
         
+    # Do diff between a field in new and old entries.
+    def diff_field(self, field):
+        # old = self.old_entry.comments
+        # new = self.new_entry.comments
+        pass
+
+
+    # Greater than of equal based on version number or date. 
+    def __ge__(self, comp2):
+        pass
  
 
 # A Component subclass which automatically retrieves UniProt Entries
