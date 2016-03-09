@@ -30,8 +30,9 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
     # initial setup in the slower test file though. Do this after I
     # have finnished edditing so heavily to test things like obtaining
     # entries from urls (when version does not exist etc.). Actually,
-    # it is probably better to subclass the slow test classes with the
-    # fast test classes in a separate test module and change setUp.
+    # it is probably better to subclass the fast test classes with the
+    # slow test classes in a separate test module and change setUp or
+    # vice versa.
     # # Unpickled setUp (slower)
     # def setUp(self):
     #     model_path = (os.path.dirname(os.path.realpath(__file__)) +
@@ -46,7 +47,8 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
             
     def tearDown(self):
         self.model_1 = None
-
+        self.component_test_tuples = None
+        
 
     def test_components_length(self):
         """Test length of Component object list in Model"""
@@ -67,16 +69,58 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
 class TestSameProteinDifferentAccessions(unittest.TestCase):
 
     def setUp(self):
-        pass
-
+        """Instantiate a Model with equivalent accessions."""
+        # Paths to find pickled Model and raw model file.
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        pickle_path = (test_path + "/pickled_testcases/same_proteins_pickle.txt")
+        model_path = (test_path + "/example_models/same_proteins.csv")
+        # Load pickled Model test cases.
+        with open(pickle_path) as f:
+            self.model = pickle.load(f)
+        # Read values used to create test case Model from file.
+        with open(model_path) as f:
+            component_reader = csv.reader(f, skipinitialspace=True)
+            self.component_test_tuples = [(row[0], row[1]) for row in
+                                          component_reader]
+        
 
     def tearDown(self):
-        pass
+        self.model = None
+        self.component_test_tuples = None
     
-    
+
+    def test_model_components_contains_same_accessions(self):
+        # Test that components in the model actually contian all of
+        # the alternative accessions and that the proteins are the
+        # same. Testing the test case essentially.
+        p53_1 = self.model.components[2]
+        p53_2 = self.model.components[3]
+        p53_3 = self.model.components[4]
+        # Test that all new entries contain the same list of accessions.
+        self.assertSetEqual(set(p53_1.new_entry.accessions),
+                            set(p53_2.new_entry.accessions))
+        self.assertSetEqual(set(p53_1.new_entry.accessions),
+                            set(p53_3.new_entry.accessions))
+        # Test first accession in all new entries.
+        self.assertSetEqual({p53_1.accession} &
+                            set(p53_1.new_entry.accessions),
+                            {p53_1.accession})
+        # Test second accession in all new entries.
+        self.assertSetEqual({p53_2.accession} &
+                            set(p53_1.new_entry.accessions),
+                            {p53_2.accession})
+        # Test third accession in all new entries.
+        self.assertSetEqual({p53_3.accession} &
+                            set(p53_1.new_entry.accessions),
+                            {p53_3.accession})
+
+        
     def test_retrieve_entries_of_same_protein(self):
-        """Test if accessions refer to the same protein."""
-       pass
+        """Test discovery of accessions which refer to the same protein."""
+        # Order should not matter.
+        same = [("P04637", "Q15086", "Q9UQ61")]
+        self.assertEqual(self.model.same_accessions(), same)
+    
     
 #     def test_component_types(self):
 #         """Test that Model.components have correct type and format.
