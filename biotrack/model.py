@@ -69,7 +69,25 @@ class Model(object):
                     groups.append(set(group))
         return groups
         
-        
+
+    def print_groups(self):
+        groups = self.group_accessions()
+        if groups:
+            print("The following proteins have merged.")
+            for group in groups:
+                # Cannot index set and do not know entries so loop and break
+                # after first component to extract a name.
+                for comp in group:
+                    group_name = "Group: " + comp.new_entry.gene_name
+                    break
+                # Remove has new and old entry bools from output.
+                output = "\n".join([str(comp).split(", Old = ")[0] for comp in group])
+                print(group_name)
+                print(output)
+        else:
+            print("No proteins have merged.")        
+    
+
     def compare_entries(self):
         """Find differeces in a field between new and old entries."""
         difs = []
@@ -85,6 +103,8 @@ class Model(object):
     def compare_entry_comments(self, old_record, new_record):
         pass
 
+
+    
 
 if __name__ == "__main__":
     model_1 = Model("../tests/example_models/two_components.csv")
