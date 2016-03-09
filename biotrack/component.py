@@ -8,16 +8,19 @@ from biotrack.fields import Fields
 
 class Component(object):
 
-    # Class variables. Make sure that these are always mutable or
+    # Class variables. Make sure that these are always immutable or
     # start as None.
     # Url templates for obtaining past and present UniProt entries.
     OLD_URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/{0}/{1}"
     NEW_URL = "http://www.uniprot.org/uniprot/{0}.txt"
+    # UniProt accession regex
     UNIPROT_ACCESSION = ("[OPQ][0-9][A-Z0-9]{3}[0-9]|" +
                          "[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}")
 
+
     def __init__(self, accession, version):
-        # Accession should be in Uniprot format.
+        # Accession should be in Uniprot format. Version should exist
+        # in UniSave.
         try:
             assert (re.match(self.UNIPROT_ACCESSION, accession) is not None)
             self.accession = str(accession)
@@ -36,21 +39,18 @@ class Component(object):
         self.new_entry = None
 
     
-    # Compare the comment sections of the new and old entries.
-    def compare_entries(self, field=None):
-        old = self.old_entry.comments
-        new = self.new_entry.comments
-
-
-    # Using Fields objects.
+    # Compare SwissProt.Record comments using Fields objects.
     def compare_entry_fields(self):
         """Return Fields object containing changes."""
         old = Fields(self.old_entry.comments)
         new = Fields(self.new_entry.comments)
         return new - old
+    
         
-    # Like this or create a Comments class?
-    def parse_comments(self, entry):
+    # Do diff between a field in new and old entries.
+    def diff_field(self, field):
+        # old = self.old_entry.comments
+        # new = self.new_entry.comments
         pass
 
     
@@ -80,6 +80,7 @@ class Component(object):
 
         If the component has old and new UniProt entries, those fields
         are True.
+
         """
         template ="Component: Acc. {}, Ver. {}, Old = {}, New = {}."
         has_old = (self.old_entry is not None)
@@ -102,6 +103,7 @@ class Component(object):
 # A Component subclass which automatically retrieves UniProt Entries
 # on instantiation.
 class AutoComponent(Component):
+    """Component subclass which retrieves UniProt entries on instantiation."""
 
     def __init__(self, accession, version):
         # Accession should be in Uniprot format.

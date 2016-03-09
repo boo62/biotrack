@@ -1,11 +1,10 @@
 """Class for retrieving and comparing new and old model components."""
 import urllib
 import csv
-import itertools
 
 from Bio import SwissProt
 
-from component import AutoComponent
+from biotrack.component import AutoComponent
 
 
 class Model(object):
@@ -28,6 +27,7 @@ class Model(object):
         
         The past and most recent UniProt entries are retrieved
         automatically through AutoComponent instantiation.
+
         """
         # List of model AutoComponent objects
         self.components = self.parse_components(filename)
@@ -40,6 +40,7 @@ class Model(object):
         UniProt_accession, entry_version, ...
         where ... are any number of other fields, for instance protein
         name, which are ignored by the parser.
+
         """
         with open(filename, 'r') as f:
             component_reader = csv.reader(f, skipinitialspace=True)
@@ -71,6 +72,12 @@ class Model(object):
         
 
     def print_groups(self):
+        """Print groups of Components which are the same protein.
+
+        Calls the method group_accessions on self and prints either
+        the groups of proteins or a message that none exist.
+
+        """
         groups = self.group_accessions()
         if groups:
             print("The following proteins have merged.")
@@ -88,9 +95,9 @@ class Model(object):
             print("No proteins have merged.")        
     
 
-    def compare_entries(self):
+    # Should change or create new methods which use GO terms and difflib.
+    def compare_entries(self, *fields):
         """Find differeces in a field between new and old entries."""
-        difs = []
         for component in self.components:
             acc = component.accession
             name = component.new_entry.gene_name
@@ -98,13 +105,3 @@ class Model(object):
             print acc
             print name
             print changes
-
-
-    def compare_entry_comments(self, old_record, new_record):
-        pass
-
-
-    
-
-if __name__ == "__main__":
-    model_1 = Model("../tests/example_models/two_components.csv")
