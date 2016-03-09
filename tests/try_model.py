@@ -2,33 +2,13 @@ import os, pickle
 from biotrack.model import Model
 
 
-# def print_groups(model):
-#     groups = model.group_accessions()
-#     if groups:
-#         print("The following proteins have merged.")
-#         for group in groups:
-#             # Cannot index set and do not know entries so loop and break
-#             # after first component to extract a name.
-#             for comp in group:
-#                 group_name = "Group: " + comp.new_entry.gene_name
-#                 break
-#             # Remove has new and old entry bools from output.
-#             output = "\n".join([str(comp).split(", Old = ")[0] for comp in group])
-#             print(group_name)
-#             print(output)
-#     else:
-#         print("No proteins have merged.")        
-    
-
-
-
 # Try out Model entry comparison
 test_path = os.path.dirname(os.path.realpath(__file__))
 
-# # 
-# model_path = (test_path + "/example_models/two_components.csv")
-# model = Model(model_path)
-# model.compare_entries()
+# Two component rib old entries
+model_path = (test_path + "/example_models/two_components.csv")
+model = Model(model_path)
+model.print_groups()
 
 # # Same as current UniProt database
 # model_most_recent_path = (test_path + "/example_models/two_components_most_recent.csv")

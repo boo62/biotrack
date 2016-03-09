@@ -65,7 +65,11 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
             self.assertIn(component[0][0], component[1].old_entry.accessions)
             self.assertIn(component[0][0], component[1].new_entry.accessions)
 
+    def test_group_accessions_returns_empty_list(self):
+        self.assertIsInstance(self.model_1.group_accessions(), list)
+        self.assertFalse(self.model_1.group_accessions())
 
+        
 class TestSameProteinDifferentAccessions(unittest.TestCase):
 
     def setUp(self):
@@ -179,6 +183,12 @@ class TestTwoGroupsSameProtein(unittest.TestCase):
         self.assertEqual(self.model.group_accessions(), same)
 
 
+    def test_printing_of_merged_groups(self):
+        # Redirect sys.stdout
+        # groups = self.model.print_groups()
+        pass
+
+    
 #     def test_component_types(self):
 #         """Test that Model.components have correct type and format.
 
