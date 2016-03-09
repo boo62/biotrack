@@ -96,23 +96,18 @@ class TestSameProteinDifferentAccessions(unittest.TestCase):
         p53_1 = self.model.components[2]
         p53_2 = self.model.components[3]
         p53_3 = self.model.components[4]
-        # Test that all new entries contain the same list of accessions.
+        # Test that all new entries contain the same list of
+        # accessions.
         self.assertSetEqual(set(p53_1.new_entry.accessions),
                             set(p53_2.new_entry.accessions))
         self.assertSetEqual(set(p53_1.new_entry.accessions),
                             set(p53_3.new_entry.accessions))
         # Test first accession in all new entries.
-        self.assertSetEqual({p53_1.accession} &
-                            set(p53_1.new_entry.accessions),
-                            {p53_1.accession})
+        self.assertIn(p53_1.accession, set(p53_1.new_entry.accessions))
         # Test second accession in all new entries.
-        self.assertSetEqual({p53_2.accession} &
-                            set(p53_1.new_entry.accessions),
-                            {p53_2.accession})
+        self.assertIn(p53_2.accession, set(p53_1.new_entry.accessions))
         # Test third accession in all new entries.
-        self.assertSetEqual({p53_3.accession} &
-                            set(p53_1.new_entry.accessions),
-                            {p53_3.accession})
+        self.assertIn(p53_3.accession, set(p53_1.new_entry.accessions))
 
         
     def test_grouping_of_accessions_of_same_protein(self):
@@ -127,7 +122,74 @@ class TestSameProteinDifferentAccessions(unittest.TestCase):
         self.assertEqual(self.model.group_accessions(group_as="comps"), same)
     
     
+class TestTwoGroupsSameProtein(unittest.TestCase):
+
+    def setUp(self):
+        """Instantiate a Model with equivalent accessions."""
+        # Paths to find pickled Model and raw model file.
+        test_path = os.path.dirname(os.path.realpath(__file__))
+        pickle_path = (test_path + "/pickled_testcases/two_groups_same_protein_pickle.txt")
+        model_path = (test_path + "/example_models/two_groups_same_protein.csv")
+        # Load pickled Model test cases.
+        with open(pickle_path) as f:
+            self.model = pickle.load(f)
+        # Read values used to create test case Model from file.
+        with open(model_path) as f:
+            component_reader = csv.reader(f, skipinitialspace=True)
+            self.component_test_tuples = [(row[0], row[1]) for row in
+                                          component_reader]
+        
+
+    def tearDown(self):
+        self.model = None
+        self.component_test_tuples = None
     
+
+    def test_model_components_contains_same_accessions(self):
+        # Test that components in the model actually contian all of
+        # the alternative accessions and that the proteins are the
+        # same. Testing the test case essentially.
+        # p53s
+        p53_1 = self.model.components[2]
+        p53_2 = self.model.components[3]
+        p53_3 = self.model.components[4]
+        # Test that all new entries contain the same list of
+        # accessions.
+        self.assertSetEqual(set(p53_1.new_entry.accessions),
+                            set(p53_2.new_entry.accessions))
+        self.assertSetEqual(set(p53_1.new_entry.accessions),
+                            set(p53_3.new_entry.accessions))
+        # Test first accession in all new entries.
+        self.assertIn(p53_1.accession, set(p53_1.new_entry.accessions))
+        # Test second accession in all new entries.
+        self.assertIn(p53_2.accession, set(p53_1.new_entry.accessions))
+        # Test third accession in all new entries.
+        self.assertIn(p53_3.accession, set(p53_1.new_entry.accessions))
+        # Rhodopsins      
+        rhod_1 = self.model.components[5]
+        rhod_2 = self.model.components[6]
+        # Test that all new entries contain the same list of
+        # accessions.
+        self.assertSetEqual(set(rhod_1.new_entry.accessions),
+                            set(rhod_2.new_entry.accessions))
+        # Test first accession in all new entries.
+        self.assertIn(rhod_1.accession, set(rhod_1.new_entry.accessions))
+        # Test second accession in all new entries.
+        self.assertIn(rhod_2.accession, set(rhod_1.new_entry.accessions))
+
+        
+    def test_grouping_of_accessions_of_same_protein(self):
+        """Test discovery of accessions which refer to the same protein."""
+        same = [{"P04637", "Q15086", "Q9UQ61"}, {"P08100", "Q16414"}]
+        self.assertEqual(self.model.group_accessions(group_as="accs"), same)
+
+
+    def test_grouping_of_components_of_same_protein(self):
+        """Test discovery of accessions which refer to the same protein."""
+        same = [set(self.model.components[2:5]), set(self.model.components[5:7])]
+        self.assertEqual(self.model.group_accessions(group_as="comps"), same)
+
+
 #     def test_component_types(self):
 #         """Test that Model.components have correct type and format.
 

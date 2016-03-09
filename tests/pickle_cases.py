@@ -77,6 +77,7 @@ TEST_CASE_MODELS = [
     # file containing the failing accession is commented out below.
     # "two_ribE_accessions.csv",
     "same_proteins.csv",
+    "two_groups_same_protein.csv"
     ]
 
 # Paths to test case models '.csv' files.
