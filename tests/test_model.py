@@ -62,8 +62,8 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
             self.assertTrue(component[1].old_entry.accessions)
             self.assertTrue(component[1].new_entry.accessions)
             # Test accessions match those read from file.
-            self.assertTrue(component[0][0] in component[1].old_entry.accessions)
-            self.assertTrue(component[0][0] in component[1].new_entry.accessions)
+            self.assertIn(component[0][0], component[1].old_entry.accessions)
+            self.assertIn(component[0][0], component[1].new_entry.accessions)
 
 
 class TestSameProteinDifferentAccessions(unittest.TestCase):
