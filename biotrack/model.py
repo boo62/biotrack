@@ -49,13 +49,20 @@ class Model(object):
     def same_accessions(self):
         """Determine whether any components are the same.
 
-        I.e. If accessions are synonymous with the same protein..
+        I.e. If accessions give the same protein.
         """
         pass
         
-    def compare_entries(self, field):
+    def compare_entries(self):
         """Find differeces in a field between new and old entries."""
-        pass
+        difs = []
+        for component in self.components:
+            acc = component.accession
+            name = component.new_entry.gene_name
+            changes = component.compare_entry_fields()
+            print acc
+            print name
+            print changes
 
 
     def compare_entry_comments(self, old_record, new_record):
