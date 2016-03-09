@@ -1,0 +1,5 @@
+P94465, 79, ribR 79/97
+P16440, 126, ribE 126/126, this one has AssertionError: Missing braces, P17619, 2, ribE 2/2
+P04637, 240, p53 240/240
+Q15086, 17, p53 17/17 TrEMBL
+Q9UQ61, 8, p53 8/14 TrEMBL

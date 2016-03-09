@@ -66,6 +66,17 @@ PICKLE_DIR = TEST_DIR + "/pickled_testcases/"
 TEST_CASE_MODELS = [
     "one_component.csv",
     "two_components.csv",
+    # You cannot use a secodary accession to retrieve a UniSave entry
+    # after merging. UniSave entries before merging and the current
+    # http://www.uniprot.org/ entry can be retrieved with a secondary
+    # accession. TrEMBLE entries will generally parse with
+    # SwissProt.read() but I have found an example where a very old
+    # ribE entry raises AssertionError: Missing braces. Hopefully
+    # UniProt formats are now stable and error free and will parse for
+    # anyone beginning to record accessions and versions. The model
+    # file containing the failing accession is commented out below.
+    # "two_ribE_accessions.csv",
+    "same_proteins.csv",
     ]
 
 # Paths to test case models '.csv' files.
