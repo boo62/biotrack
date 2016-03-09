@@ -63,7 +63,8 @@ class Model(object):
             for comp in comp_set:
                 same = filter(__eq__, self.components)
                 if len(same) >= 2:
-                    sames.append(tuple(same))              
+                    sames.append(tuple(same))
+        return "poo"
         same = [comp for comp in self.components]
   
         
