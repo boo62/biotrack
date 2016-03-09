@@ -62,9 +62,8 @@ class Model(object):
         groups = []
         for comp in self.components:
             if comp not in grouped:
-                # Group of Component objects.
                 group = filter(comp.__eq__, self.components)
-                # Do not want matches to self.
+                # Do not want matches of same Component instance.
                 if len(group) >= 2:
                     grouped += group
                     groups.append(set(group))
