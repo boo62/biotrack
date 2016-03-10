@@ -23,6 +23,7 @@ tests/test_component.py
 tests/test_fields.py
 tests/test_model.py
 tests/try_model.py
+tests/example_models/many_different_components.csv
 tests/example_models/one_component.csv
 tests/example_models/same_proteins.csv
 tests/example_models/two_RibE_accessions.csv
@@ -32,6 +33,7 @@ tests/example_models/two_components_most_recent.csv
 tests/example_models/two_components_recent_changes.csv
 tests/example_models/two_groups_same_protein.csv
 tests/example_models/two_ribE_accessions.csv
+tests/example_models/unreviewed_components.csv
 tests/pickled_testcases/P16440_ac_pickle.txt
 tests/pickled_testcases/P94465_ac_pickle.txt
 tests/pickled_testcases/one_component_pickle.txt
