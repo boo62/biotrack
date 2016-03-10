@@ -11,8 +11,8 @@ config = {
     'author_email': 'daniel.boocock@protonmail.ch',
     'version': '0.1',
     'install_requires': [],
-    'packages': [],
-    'scripts': [],
+    'packages': ["biotrack", "tests"],
+    'scripts': ["bin/modcomp"],
     'name': 'biotrack'
 }
 

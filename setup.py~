@@ -4,16 +4,16 @@ except ImportError:
     from distutils.core import setup
 
 config = {
-    'description': 'My Project',
+    'description': 'Track changes in databases to components in a model.',
     'author': 'Daniel Boocock',
-    'url': 'URL to get it at.',
-    'download_url': 'Where to download it.',
+    'url': 'https://boo62@bitbucket.org/boo62/biotrack.git',
+    'download_url': 'https://boo62@bitbucket.org/boo62/biotrack.git',
     'author_email': 'daniel.boocock@protonmail.ch',
     'version': '0.1',
-    'install_requires': ['pytest'],
-    'packages': ['biotrack'],
-    'scripts': [],
-    'name': 'projectname'
+    'install_requires': [],
+    'packages': ["biotrack", "tests"],
+    'scripts': ["bin/modcomp"],
+    'name': 'biotrack'
 }
 
 setup(**config)
