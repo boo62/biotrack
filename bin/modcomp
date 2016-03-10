@@ -5,6 +5,7 @@ import argparse
 from biotrack.model import Model
 
 
+# Parser not yet implemented.
 parser = argparse.ArgumentParser(description="Look for changes in UniProt.")
 
 

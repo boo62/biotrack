@@ -31,8 +31,7 @@ class TestBasicTwoComponentModelParsing(unittest.TestCase):
     # have finnished edditing so heavily to test things like obtaining
     # entries from urls (when version does not exist etc.). Actually,
     # it is probably better to subclass the fast test classes with the
-    # slow test classes in a separate test module and change setUp or
-    # vice versa.
+    # slow test classes in a separate test module and override setUp.
     # # Unpickled setUp (slower)
     # def setUp(self):
     #     model_path = (os.path.dirname(os.path.realpath(__file__)) +

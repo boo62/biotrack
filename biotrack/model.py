@@ -95,6 +95,8 @@ class Model(object):
     
 
     # Should change or create new methods which use GO terms and difflib.
+    # SwissProt.Record does not contain GO terms so need other way of
+    # getting these.
     def compare_entries(self):
         """Find differeces in a field between new and old entries.
 

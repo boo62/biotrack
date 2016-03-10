@@ -21,13 +21,11 @@ class Component(object):
     def __init__(self, accession, version):
         # Accession should be in Uniprot format. Version should exist
         # in UniSave.
-        try:
-            assert (re.match(self.UNIPROT_ACCESSION, accession) is not None)
+        if re.match(self.UNIPROT_ACCESSION, str(accession)) is not None:
             self.accession = str(accession)
-        except AssertionError:
+        else:
             template = "Accession '{}' not in UniProt format."
-            print(template.format(accession))
-            self.accession = str(accession)
+            raise ValueError(template.format(accession))
         # Version should be an integer or string representation of an
         # integer.
         try:
@@ -35,7 +33,7 @@ class Component(object):
             int(str(version))
             self.version = str(version)
         except ValueError:
-            print("Version '{}' is not an integer.".format(version))
+            raise ValueError("Version '{}' is not an integer.".format(version))
         self.old_entry = None
         self.new_entry = None
 
@@ -130,6 +128,6 @@ class AutoComponent(Component):
     def __init__(self, accession, version):
         # Call Component (super)  __init__.
         super(AutoComponent, self).__init__(accession, version)
-        # Fetch the UniProt entries on instantiation
+        # Fetch the UniProt entries on instantiation.
         self.old_entry = self.fetch_old_entry()
         self.new_entry = self.fetch_new_entry()
