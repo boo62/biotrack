@@ -95,7 +95,16 @@ class Component(object):
         old = Fields(self.old_entry.comments)
         new = Fields(self.new_entry.comments)
         return new - old
-    
+
+
+    # Comments are in list. Want them as dict.
+    def dict_comments(self, comments):
+        # Keep fields as uppercase in case we want to compare back with
+        # UniProt.Record.comments
+        comments = [str.split(comment, ":", 1) for comment in comments]
+        comments = [(comment[0], str.strip(comment[1])) for comment in comments]
+        return dict(comments)
+  
         
     # Do diff between a field in new and old entries.
     def diff_field(self, field):

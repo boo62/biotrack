@@ -3,6 +3,11 @@
 # comments as field_set and field_dict attributes of Fields. 
 
 
+# Parses a SwissProt.Record.comments from a list to a dictionary which
+# is stored as the attribute field_dict. Provides methods for
+# manipulating, comparing, and printing the fields in the comments
+# attribute of a SwissProt.Record. Alternatively, could just have a
+# parser method in Component and use dictionaries.
 class Fields(object):
 
     # get comments into a dictionary.
@@ -13,26 +18,20 @@ class Fields(object):
         # Fields as a dictionary (or nested dictionary).
         # split(s, sep=":", maxsplit=1)
         if comments is not None:
-            fields = self.parse_comments(comments)
-          #  self.field_set = fields[0]
-            self.field_dict = fields[1]
-
+            self.field_dict = self.parse_comments(comments)
             
     def parse_comments(self, comments):
         # Keep fields as uppercase in case we want to compare back with
         # UniProt.Record.comments
         comments = [str.split(comment, ":", 1) for comment in comments]
-        comments = [(comment[0], str.strip(comment[1])) for comment in comments]
-        fields = [comment[0] for comment in comments]
-        return set(fields), dict(comments)
+        comments = [(str.strip(comment[0]), str.strip(comment[1])) for comment in comments]
+        return dict(comments)
         
 
     # Compare if the fields of two Fields are equal.
     # Sets are dicts are both equal.
     def __eq__(self, fields2):
-        #sets_equal = (self.field_set == fields2.field_set)
-        dicts_equal = (self.field_dict == fields2.field_dict)
-        return dicts_equal
+        return (self.field_dict == fields2.field_dict)
 
     
     # Subtract to Fields objects.
@@ -49,20 +48,17 @@ class Fields(object):
             # Need to test not only if fields are new but if fields
             # have changed. Does not test removed fields.
             # Find new fields.
-          #  new = self.field_set - other.field_set
             new = set(self.field_dict.keys()) - set(other.field_dict.keys())
-            #new = {k: v for k, v in self.field_dict.iteritems() if k not in other.field_dict.keys()}
             # Find common fields whose values have changed.
             common = set(self.field_dict.keys()) & set(other.field_dict.keys())
             changed = [field for field in common if
                        self.field_dict[field] != other.field_dict[field]]
             # Attributes for Fields object containing the changes
-            new_field_set = set(changed) | new
-            new_field_dict = {k: self.field_dict[k] for k in new_field_set}
+            updated_fields = set(changed) | new
+            updated_dict = {k: self.field_dict[k] for k in updated_fields}
             # Create Fields object containing the changes.
             dif = Fields()
-            #dif.field_set = new_field_set
-            dif.field_dict = new_field_dict
+            dif.field_dict = updated_dict
             return dif
 
     
