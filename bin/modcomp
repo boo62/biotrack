@@ -10,17 +10,18 @@ parser = argparse.ArgumentParser(description="Look for changes in UniProt.")
 
 
 try:
-    model_path = os.path.dirname(os.path.abspath(__file__)) + "/" + sys.argv[1]
+    model_path = os.path.dirname(os.path.abspath(__name__)) + "/" + sys.argv[1]
 except IndexError:
     raise IndexError("Requires a '.csv' file as first argument.")
 except IOError:
     raise IOError("First argument must be a '.csv' file.")
 
+print("Fetching records from UniProt...")
 model = Model(model_path)
-print model
-print("")
-model.print_groups()
 print("")
 print("Annotation Changes:")
 model.compare_entries()
-
+print("")
+# Print merged groups of accessoins
+model.print_groups()
+print("")

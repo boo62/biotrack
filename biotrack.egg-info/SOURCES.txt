@@ -1,5 +1,5 @@
 MANIFEST.in
-README.md
+README
 requirements.txt
 setup.py
 setup2.py
