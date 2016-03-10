@@ -1,13 +1,9 @@
-# Fields object to hold the comments section of a Bio.SwissProt.Record
-# object in more convenient and manipulatable data structures. Parses
-# comments as field_set and field_dict attributes of Fields. 
-
-
 # Parses a SwissProt.Record.comments from a list to a dictionary which
 # is stored as the attribute field_dict. Provides methods for
 # manipulating, comparing, and printing the fields in the comments
-# attribute of a SwissProt.Record. Alternatively, could just have a
-# parser method in Component and use dictionaries.
+# attribute of a SwissProt.Record. Alternatively, I could just have a
+# parser method in Component and use dictionaries, or I could
+# look into subclassing the base python dict object.
 class Fields(object):
 
     # get comments into a dictionary.
@@ -60,6 +56,7 @@ class Fields(object):
             dif = Fields()
             dif.field_dict = updated_dict
             return dif
+
 
     
     def __str__(self):

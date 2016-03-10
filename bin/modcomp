@@ -18,7 +18,6 @@ except IOError:
 model = Model(model_path)
 print model
 print("")
-print("Accession Merging:")
 model.print_groups()
 print("")
 print("Annotation Changes:")

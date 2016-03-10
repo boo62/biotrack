@@ -79,7 +79,7 @@ class Model(object):
         """
         groups = self.group_accessions()
         if groups:
-            print("The following proteins have merged.")
+            print("The following proteins have merged:")
             for group in groups:
                 # Cannot index set and do not know entries so loop and break
                 # after first component to extract a name.
@@ -107,8 +107,11 @@ class Model(object):
             acc = component.accession
             name = component.new_entry.gene_name
             changes = component.compare_entry_fields()
+            print ""
+            print "Component:"
             print acc
             print name
+            print "Updates:"
             print changes
 
 

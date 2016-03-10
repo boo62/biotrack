@@ -97,13 +97,17 @@ class Component(object):
         return new - old
 
 
-    # Comments are in list. Want them as dict.
-    def dict_comments(self, comments):
-        # Keep fields as uppercase in case we want to compare back with
-        # UniProt.Record.comments
-        comments = [str.split(comment, ":", 1) for comment in comments]
-        comments = [(comment[0], str.strip(comment[1])) for comment in comments]
-        return dict(comments)
+    # # Comments are in list. Want them as dict.
+    # def dict_comments(self, comments):
+    #     # Keep fields as uppercase in case we want to compare back with
+    #     # UniProt.Record.comments
+    #     comments = [str.split(comment, ":", 1) for comment in comments]
+    #     comments = [(comment[0], str.strip(comment[1])) for comment in comments]
+    #     return dict(comments)
+
+    # def find_updates(self):
+    #     old_comments = self.old_entry.
+    #     new_comments = 
   
         
     # Do diff between a field in new and old entries.
