@@ -14,7 +14,7 @@ class Fields(object):
         # split(s, sep=":", maxsplit=1)
         if comments is not None:
             fields = self.parse_comments(comments)
-            self.field_set = fields[0]
+          #  self.field_set = fields[0]
             self.field_dict = fields[1]
 
             
@@ -30,9 +30,9 @@ class Fields(object):
     # Compare if the fields of two Fields are equal.
     # Sets are dicts are both equal.
     def __eq__(self, fields2):
-        sets_equal = (self.field_set == fields2.field_set)
+        #sets_equal = (self.field_set == fields2.field_set)
         dicts_equal = (self.field_dict == fields2.field_dict)
-        return sets_equal and dicts_equal
+        return dicts_equal
 
     
     # Subtract to Fields objects.
@@ -49,9 +49,11 @@ class Fields(object):
             # Need to test not only if fields are new but if fields
             # have changed. Does not test removed fields.
             # Find new fields.
-            new = self.field_set - other.field_set
+          #  new = self.field_set - other.field_set
+            new = set(self.field_dict.keys()) - set(other.field_dict.keys())
+            #new = {k: v for k, v in self.field_dict.iteritems() if k not in other.field_dict.keys()}
             # Find common fields whose values have changed.
-            common = self.field_set & other.field_set
+            common = set(self.field_dict.keys()) & set(other.field_dict.keys())
             changed = [field for field in common if
                        self.field_dict[field] != other.field_dict[field]]
             # Attributes for Fields object containing the changes
@@ -59,7 +61,7 @@ class Fields(object):
             new_field_dict = {k: self.field_dict[k] for k in new_field_set}
             # Create Fields object containing the changes.
             dif = Fields()
-            dif.field_set = new_field_set
+            #dif.field_set = new_field_set
             dif.field_dict = new_field_dict
             return dif
 

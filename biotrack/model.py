@@ -8,7 +8,7 @@ from biotrack.component import AutoComponent
 
 
 class Model(object):
-    """Class containing model Components and UniProt entries."""
+    """Class containing model Components which have UniProt entries."""
 
     def __init__(self, filename):
         """Parse model from file and collect new and old UniProt entries.

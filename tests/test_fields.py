@@ -24,8 +24,8 @@ class TestVeryBasicFieldsValues(unittest.TestCase):
         self.fields = None
 
         
-    def test_basic_field_set_values(self):
-        self.assertSetEqual({"FUNCTION", "SIMILARITY"}, self.fields.field_set)
+    # def test_basic_field_set_values(self):
+    #     self.assertSetEqual({"FUNCTION", "SIMILARITY"}, self.fields.field_set)
 
         
     def test_basic_field_dict_values(self):
@@ -66,13 +66,13 @@ class TestRibRProteinFieldsValues(unittest.TestCase):
     def test_comment_parsing(self):
         # Create a test Fields object.
         test_fields = Fields(self.old_comments)
-        field_set = test_fields.field_set
+      #  field_set = test_fields.field_set
         field_dict = test_fields.field_dict
         # A Field should have field_set and field_dict attributes. 
-        self.assertIsInstance(test_fields.field_set, set)
+     #   self.assertIsInstance(test_fields.field_set, set)
         self.assertIsInstance(test_fields.field_dict, dict)
         # Test that all of the fields in set are also keys in dict.
-        self.assertSetEqual(field_set, set(field_dict.keys()))
+      #  self.assertSetEqual(field_set, set(field_dict.keys()))
         # Test that all values in field_dict are strings and that
         # there is no leading or trailing whitespace.
         for field in field_dict.keys():
@@ -129,7 +129,7 @@ class TestDifferentFieldDiscovery(unittest.TestCase):
         # Create second Fields with altered FUNCTION.
         fields2 = Fields(self.comments2)
         # Test that values FUNCTION value has changed but set has not.
-        self.assertSetEqual(self.fields1.field_set, fields2.field_set)
+       # self.assertSetEqual(self.fields1.field_set, fields2.field_set)
         self.assertNotEqual(self.fields1, fields2)
         self.assertNotEqual(self.fields1.field_dict["FUNCTION"],
                             fields2.field_dict["FUNCTION"])

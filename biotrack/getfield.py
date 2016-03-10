@@ -3,7 +3,7 @@ import urllib
 
 from Bio import SwissProt
 
-from model import Model
+from biotrack.model import Model
 
 URL = "http://www.ebi.ac.uk/uniprot/unisave/rest/raw/"
 
@@ -22,34 +22,39 @@ url_ribE_new = "P16440/126"
 url_new_ribE = "http://www.uniprot.org/uniprot/P16440.txt"
 handle_ribE = urllib.urlopen(url_new_ribE)
 ribE = SwissProt.read(handle_ribE)
-print ribE.accessions
+# print ribE.accessions
+# print ribE.description
+#print ribE.keywords
+#print ribE.comments
+#print ribE.features
+#print ribE.cross_references
 # p53 is not an enzyme and has functional annotations in the same place Record.comments
 # There is a very long list so a diff is necesssary to determine what is new and what is not.
 p53 = "http://www.uniprot.org/uniprot/P04637.txt"
 handle_p53 = urllib.urlopen(p53)
 record_p53 = SwissProt.read(handle_p53)
 print record_p53.accessions
+print record_p53.description
+print record_p53.comments
+# #handle1 = urllib.urlopen(URL + url_ribE_new)
+# print "old"
+# handle_old = urllib.urlopen(URL + url_old)
+# record_old = SwissProt.read(handle_old)
+# print type(record_old)
+# print record_old.created
+# print record_old.sequence_update
+# print record_old.annotation_update
 
+# print "new"
+# handle_new = urllib.urlopen(URL + url_new)
+# record_new = SwissProt.read(handle_new)
+# print record_new.accessions
+# print type(record_new)
+# print record_new.created
+# print record_new.sequence_update
+# print record_new.annotation_update
 
-#handle1 = urllib.urlopen(URL + url_ribE_new)
-print "old"
-handle_old = urllib.urlopen(URL + url_old)
-record_old = SwissProt.read(handle_old)
-print type(record_old)
-print record_old.created
-print record_old.sequence_update
-print record_old.annotation_update
-
-print "new"
-handle_new = urllib.urlopen(URL + url_new)
-record_new = SwissProt.read(handle_new)
-print record_new.accessions
-print type(record_new)
-print record_new.created
-print record_new.sequence_update
-print record_new.annotation_update
-
-print record_new.comments
+# print record_new.comments
 
 
 #print record.annotation_update

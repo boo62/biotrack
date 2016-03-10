@@ -10,9 +10,8 @@ config = {
     'author': 'Daniel Boocock',
     'author_email': 'daniel.boocock@protonmail.ch',
     'licence': ''  
-    'install_requires': [],
-    'packages': ["biotrack", "tests"],
-    'scripts': ["bin/modcomp"],
+    'packages': '["biotrack", "tests"]',
+    'scripts': '["bin/modcomp"]',
     'name': 'biotrack'
 }
 
