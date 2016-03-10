@@ -7,7 +7,7 @@
 # Setuptools distribution folder.
 /dist/
 # Test cache
-tests/*pycache*/
+tests/__pycache__/
 /.cache/
 # Python egg metadata, regenerated from source files by setuptools.
 /biotrack.egg-info/
