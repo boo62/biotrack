@@ -1,3 +1,4 @@
+"""A set of tests for Component and AutoComponent classes."""
 import unittest
 import os
 import pickle
@@ -26,20 +27,25 @@ class TestComponentAttributes(unittest.TestCase):
         self.assertIsInstance(int(self.comp1.version), int)
 
 
-    # This may be redundant given test_component_attribute_values.
     def test_no_white_space(self):
-        self.assertEqual(self.comp1.accession.strip(), self.comp1.accession)
-        self.assertEqual(self.comp1.version.strip(), self.comp1.version)
+        self.assertEqual(self.comp1.accession.strip(),
+                         self.comp1.accession)
+        self.assertEqual(self.comp1.version.strip(),
+                         self.comp1.version)
 
         
     def test_non_uniprot_accession_raises_value_error(self):
-        self.assertRaises(ValueError, lambda: Component("N0TAPr0T", "5"))
-        self.assertRaises(ValueError, lambda: Component(6, "5"))
+        self.assertRaises(ValueError,
+                          lambda: Component("N0TAPr0T", "5"))
+        self.assertRaises(ValueError,
+                          lambda: Component(6, "5"))
 
 
     def test_non_integer_version_rasies_exception(self):
-        self.assertRaises(ValueError, lambda: Component("P94465", "v1"))
-        self.assertRaises(ValueError, lambda: Component("P94465", 8.9))
+        self.assertRaises(ValueError,
+                          lambda: Component("P94465", "v1"))
+        self.assertRaises(ValueError,
+                          lambda: Component("P94465", 8.9))
 
 
         
@@ -74,33 +80,34 @@ class TestAutoComponent(unittest.TestCase):
 
     # This may be redundant given test_component_attribute_values.
     def test_no_white_space(self):
-        self.assertEqual(self.auto_comp.accession.strip(), self.auto_comp.accession)
-        self.assertEqual(self.auto_comp.version.strip(), self.auto_comp.version)
+        self.assertEqual(self.auto_comp.accession.strip(),
+                         self.auto_comp.accession)
+        self.assertEqual(self.auto_comp.version.strip(),
+                         self.auto_comp.version)
 
         
     def test_non_uniprot_accession_raises_value_error(self):
-        # Had trouble getting this to work. Seems an odd way of doing
-        # things. Second argument must be callable so can't just write
-        # Component("N0TAPR0T", "79") and must give an instance of a
-        # Component to __init__ so use auto_comp. If I raise the error in
-        # component.py then the unittest raises the error and
-        # fails. Instead I have to handle it?
-        self.assertRaises(ValueError, lambda: AutoComponent("N0TAPR0T", "79"))
+        self.assertRaises(ValueError, lambda:
+                          AutoComponent("N0TAPR0T", "79"))
         self.assertRaises(ValueError, lambda: AutoComponent(6, "5"))
         
     def test_non_integer_version_rasies_exception(self):
-        self.assertRaises(ValueError, lambda: AutoComponent("P94465", "v1"))
-        self.assertRaises(ValueError, lambda: AutoComponent("P94465", 8.9))
+        self.assertRaises(ValueError,
+                          lambda: AutoComponent("P94465", "v1"))
+        self.assertRaises(ValueError,
+                          lambda: AutoComponent("P94465", 8.9))
 
         
-    # This also tests that they are fetched
     def test_entries_have_the_expected_accessions(self):
-        self.assertTrue(self.auto_comp.accession in self.auto_comp.old_entry.accessions)
-        self.assertTrue(self.auto_comp.accession in self.auto_comp.new_entry.accessions)
+        self.assertTrue(self.auto_comp.accession in
+                        self.auto_comp.old_entry.accessions)
+        self.assertTrue(self.auto_comp.accession in
+                        self.auto_comp.new_entry.accessions)
 
 
     def test_fields_object_based_comparison(self):
         # Also need a test case where old and new are the same to test
-        # that None is returned.
+        # that None is returned.  Compares new and old entry attibutes
+        # and returns a Fields object with the difference.
         changes = self.auto_comp.compare_entry_fields()
         self.assertIsInstance(changes, Fields)

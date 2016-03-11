@@ -1,3 +1,4 @@
+"""Pickle some test cases to speed up tests."""
 # It is slow to obtain entry data from a url every time when running
 # tests. I only need to do this when I change a method which affects
 # model insantiation. I can pickle some test cases and load these in
@@ -8,10 +9,7 @@
 #
 # Instantiations should be tested in a separate test file which is run
 # separately from other unittests and will be much slower. I will have
-# to work out how to exclude these from py.test.
-#
-# Alternatively instantiation could be tested after the fact using the
-# results it produces in the pickled test cases.
+# to work out how to exclude these from py.test. 
 import os
 import pickle
 
