@@ -6,10 +6,7 @@ bin/modcomp
 biotrack/__init__.py
 biotrack/component.py
 biotrack/fields.py
-biotrack/getfield.py
 biotrack/model.py
-biotrack/try_model.py
-biotrack/try_things.py
 biotrack.egg-info/PKG-INFO
 biotrack.egg-info/SOURCES.txt
 biotrack.egg-info/dependency_links.txt

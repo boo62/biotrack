@@ -1,3 +1,4 @@
+# Trow away script to look at the output from Model methods.
 import os, pickle
 from biotrack.model import Model
 

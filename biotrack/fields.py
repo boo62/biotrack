@@ -25,7 +25,8 @@ class Fields(object):
         manipulation.
 
         """
-        # Should raise error if comments is not in expected format.
+        # Could add code to raise error if comments is not in expected
+        # format.
         if comments is not None:
             self.field_dict = self.parse_comments(comments)
 
@@ -35,7 +36,8 @@ class Fields(object):
         # Keep fields as uppercase in case we want to compare back with
         # UniProt.Record.comments
         comments = [str.split(comment, ":", 1) for comment in comments]
-        comments = [(str.strip(comment[0]), str.strip(comment[1])) for comment in comments]
+        comments = [(str.strip(comment[0]), str.strip(comment[1])) for
+                    comment in comments]
         return dict(comments)
         
 
@@ -45,7 +47,6 @@ class Fields(object):
         return (self.field_dict == fields2.field_dict)
 
     
-    # Subtract to Fields objects.
     def __sub__(self, other):
         """Return a Fields object containing differences.
 
