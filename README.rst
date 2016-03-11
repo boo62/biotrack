@@ -39,7 +39,7 @@ How to install
 --------------
 
 biotrack is available as a Python package. Istallation requires
-setuptools and is tested for Python 2.7.6 and higher.
+setuptools and is tested for Python 2.7.6 and 2.7.11.
 
 Uncompress the tar.gz file and cd inside it. (If you are reading this
 you probably already have.)
@@ -57,7 +57,6 @@ To see that biotrack (0.1) is installed.
   pip list
 
 To uninstall
-------------
 
   pip uninstall biotrack
 
@@ -109,9 +108,8 @@ Model files should be in .csv format.
 
 Other fields are ignored by the parser.
 
-Issues:
--------
-
+Issues
+------
 
 * Currently no exception handling for non-existant UniProt entries.
   
@@ -119,7 +117,6 @@ Issues:
   
   - It will crash if an accession is in valid UniProt format but does
     not exist on the database.
-
 
 
 * Very old entries.
