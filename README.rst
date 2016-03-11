@@ -77,7 +77,7 @@ requirements.txt gives a list of packaged used in the development environment.
 
 To install these:
 
- pip intall requirements.txt
+ pip intall -r requirements.txt
 
 Run modcomp
 -----------

@@ -354,10 +354,10 @@ components.</p>
 <div class="section" id="suggested-usage">
 <h1>Suggested Usage</h1>
 <p>At the time that a component or parameter for a component is used in a
-model, a user
-the version number of the database is saved allowing access to the past state of
-the database at some future time. Alternatively, the entry for that component is
-downloaded and saved in a compressed format.</p>
+model, a user the version number of the database is saved allowing
+access to the past state of the database at some future
+time. Alternatively, the entry for that component is downloaded and
+saved in a compressed format.</p>
 <ul class="simple">
 <li>Given a list of model components and accessions, or simply the compressed past
 entries, the present entries for each component is obtained.</li>
@@ -400,7 +400,7 @@ Insallation requires setuptools.</p>
 <p>requirements.txt gives a list of packaged used in the development environment.</p>
 <p>To install these:</p>
 <blockquote>
-pip intall requirements.txt</blockquote>
+pip intall -r requirements.txt</blockquote>
 </div>
 <div class="section" id="run-modcomp">
 <h1>Run modcomp</h1>
@@ -452,14 +452,6 @@ containing the failing accession is &quot;two_ribE_accessions.csv&quot;.</li>
 </li>
 </ul>
 </div>
-<div class="section" id="alternative-approaches">
-<h1>Alternative Approaches:</h1>
-<ul class="simple">
-<li>For automatically generated models (Path2Models) this is not an
-issue since a model is generated from the latest information in a
-database.</li>
-</ul>
-</div>
 <div class="section" id="ideas-for-future-releases">
 <h1>Ideas for future releases</h1>
 <ul class="simple">
@@ -476,11 +468,13 @@ fields of the SwissProt.Record.comments list a user wants to view
 changes. This will require fecthing the records first and then
 giving a list of options to the user.</li>
 <li>Django implementation. This could tell the user if any proteins have
-merged and provide links to UniSave comparison.
-<a class="reference external" href="http://www.ebi.ac.uk/uniprot/unisave/app/#/">http://www.ebi.ac.uk/uniprot/unisave/app/#/</a></li>
+merged and provide links to a UniSave diff comparison for any
+annotation changes.</li>
+<li>Explore options for interfacing with the BioModels database.</li>
 <li>It is relatively easy to track changes to known components which we
 specify. How do we detect new components to include? We could study
 pathway databases (e.g. KEGG, UniPathway) or use GO.</li>
+<li>Expand to other types of records and databases.</li>
 </ul>
 </div>
 </div>
