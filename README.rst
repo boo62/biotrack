@@ -18,8 +18,7 @@ components.
 Proposal:
 ---------
 
-
- At the time that a component or parameter for a component is used in a model,
+At the time that a component or parameter for a component is used in a model,
 the version number of the database is saved allowing access to the past state of
 the database at some future time. Alternatively, the entry for that component is
 downloaded and saved in a compressed format.
@@ -84,6 +83,7 @@ Alternative Approaches:
 
 
 Ideas for future releases:
+--------------------------
 
 - There should be an option to return an updated model file with the
 latest entry versions.
