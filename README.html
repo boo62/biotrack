@@ -341,35 +341,32 @@ ul.auto-toc {
 <div class="document" id="biotrack">
 <h1 class="title">biotrack</h1>
 
-<p>Track changes to components of a biological model in UniProt.</p>
+<p>Track changes in UniProt entries for components of a biological model.</p>
 <div class="section" id="the-problem">
 <h1>The Problem</h1>
 <p>If an author has many models, it may be hard to keep track of the literature for
 all of them, or some of them may be abandoned. An author may revisit a model
 after several years or it may be picked up by another researcher. It would be
-useful to see whether there have been any developments which might be used to
+useful to see whether there have been any developments, which might be used to
 revise the model, without having to trawl through databases for all of the
 components.</p>
 </div>
-<div class="section" id="suggested-usage">
-<h1>Suggested Usage</h1>
-<p>At the time that a component or parameter for a component is used in a
-model, a user the version number of the database is saved allowing
-access to the past state of the database at some future
-time. Alternatively, the entry for that component is downloaded and
-saved in a compressed format.</p>
+<div class="section" id="description">
+<h1>Description</h1>
 <ul class="simple">
-<li>Given a list of model components and accessions, or simply the compressed past
-entries, the present entries for each component is obtained.</li>
-<li>A user specifies which fields (e.g. rate constant, function, expression and
-regulation) they want to compare for a given component, and any differences
-between the past and present versions are shown.</li>
+<li>At the time that a component or parameter for a component is used in
+a model, a user should record the accession and version number of
+the UniProt entry in a csv file.</li>
+<li>Given this file, the old and present entries for each component are
+obtained.</li>
+<li>A comparison is done to see if any of the protein accessions have
+merged or if there have been any changes to annotations
+(e.g. function, kinetic parameters, regulation) in the
+SwissProt.Record.components representation of the entries.</li>
+<li>These chages are shown to the user.</li>
 <li>This doesn't necessitate that the components are part of a model
 (i.e. anything written in SMBL, CellML, etc.,), that is just a suggested
 use.</li>
-<li>At first I will just try to do this for rate constants in UniProt. However, it
-would probably be more useful to track function, expression, regulation,
-and changes in pathway databases.</li>
 </ul>
 </div>
 <div class="section" id="how-to-install">
@@ -397,7 +394,7 @@ pip uninstall biotrack</blockquote>
 <h1>Requirements</h1>
 <p>Hopefully the dependencies will be handled in the installation.
 Insallation requires setuptools.</p>
-<p>requirements.txt gives a list of packaged used in the development environment.</p>
+<p>requirements.txt gives a list of packages used in the development environment.</p>
 <p>To install these:</p>
 <blockquote>
 pip intall -r requirements.txt</blockquote>
@@ -410,24 +407,25 @@ provided.</p>
 <p>cd tests/example_models/</p>
 <p>modcomp &lt;filename&gt;</p>
 </blockquote>
-<p>This compares past UniProt entries of proteins in the model file to the
-current entries in the UniProt database. It will tell you whether any
-function annotations have changed or been updated and if so will print
-the updated fields. A check is also performed to see if any accessions
-have merged and if so the groups are printed.</p>
-<p>Model files should be in .csv format.</p>
-<blockquote>
-UniProt accession, version, other fields...</blockquote>
-<p>Other fields are ignored by the parser.</p>
+<p>This compares past UniProt entries of proteins in the model file to
+the current entries in the UniProt database. It will tell you whether
+any function annotations have changed or been added, and if so will
+print the new versions of the fields. A check is also performed to see
+if any accessions have merged and if so the groups are printed.</p>
 <p>To see examples of both behaviours I suggest you run modcomp on the
 following two example models.</p>
 <blockquote>
 <p>two_components.csv</p>
 <p>two_groups_same_protein.csv</p>
 </blockquote>
+<p>The first model contains two proteins, only one of which has changes.</p>
 <p>The second model contains some very old entries p53 entries and so
 spews out a long list of annotation changes. What we are interested in
 is the merging of groups of the same protein at the end of the output.</p>
+<p>Model files should be in .csv format.</p>
+<blockquote>
+UniProt accession, version, other fields...</blockquote>
+<p>Other fields are ignored by the parser.</p>
 </div>
 <div class="section" id="issues">
 <h1>Issues:</h1>
@@ -474,7 +472,7 @@ annotation changes.</li>
 <li>It is relatively easy to track changes to known components which we
 specify. How do we detect new components to include? We could study
 pathway databases (e.g. KEGG, UniPathway) or use GO.</li>
-<li>Expand to other types of records and databases.</li>
+<li>Expand to other types of molecule and databases.</li>
 </ul>
 </div>
 </div>

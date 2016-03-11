@@ -2,8 +2,7 @@
 biotrack
 ========
 
-Track changes to components of a biological model in UniProt.
-
+Track changes in UniProt entries for components of a biological model.
 
 The Problem
 -----------
@@ -11,34 +10,30 @@ The Problem
 If an author has many models, it may be hard to keep track of the literature for
 all of them, or some of them may be abandoned. An author may revisit a model
 after several years or it may be picked up by another researcher. It would be
-useful to see whether there have been any developments which might be used to
+useful to see whether there have been any developments, which might be used to
 revise the model, without having to trawl through databases for all of the
 components.
 
-Suggested Usage
----------------
+Description
+-----------
 
-At the time that a component or parameter for a component is used in a
-model, a user the version number of the database is saved allowing
-access to the past state of the database at some future
-time. Alternatively, the entry for that component is downloaded and
-saved in a compressed format.
+* At the time that a component or parameter for a component is used in
+  a model, a user should record the accession and version number of
+  the UniProt entry in a csv file.
 
-* Given a list of model components and accessions, or simply the compressed past
-  entries, the present entries for each component is obtained.
+* Given this file, the old and present entries for each component are
+  obtained.
 
-* A user specifies which fields (e.g. rate constant, function, expression and
-  regulation) they want to compare for a given component, and any differences
-  between the past and present versions are shown.
+* A comparison is done to see if any of the protein accessions have
+  merged or if there have been any changes to annotations
+  (e.g. function, kinetic parameters, regulation) in the
+  SwissProt.Record.components representation of the entries.
+
+* These chages are shown to the user.
 
 * This doesn't necessitate that the components are part of a model
   (i.e. anything written in SMBL, CellML, etc.,), that is just a suggested
   use.
-
-* At first I will just try to do this for rate constants in UniProt. However, it
-  would probably be more useful to track function, expression, regulation,
-  and changes in pathway databases.
-
 
 How to install
 --------------
@@ -73,7 +68,7 @@ Requirements
 Hopefully the dependencies will be handled in the installation.
 Insallation requires setuptools.
 
-requirements.txt gives a list of packaged used in the development environment.
+requirements.txt gives a list of packages used in the development environment.
 
 To install these:
 
@@ -89,18 +84,12 @@ provided.
 
  modcomp <filename>
 
-This compares past UniProt entries of proteins in the model file to the
-current entries in the UniProt database. It will tell you whether any
-function annotations have changed or been updated and if so will print
-the updated fields. A check is also performed to see if any accessions
-have merged and if so the groups are printed.
+This compares past UniProt entries of proteins in the model file to
+the current entries in the UniProt database. It will tell you whether
+any function annotations have changed or been added, and if so will
+print the new versions of the fields. A check is also performed to see
+if any accessions have merged and if so the groups are printed.
  
-Model files should be in .csv format.
-
- UniProt accession, version, other fields...
-
-Other fields are ignored by the parser.
-
 To see examples of both behaviours I suggest you run modcomp on the
 following two example models.
 
@@ -108,10 +97,18 @@ following two example models.
 
  two_groups_same_protein.csv
 
+The first model contains two proteins, only one of which has changes.
+
 The second model contains some very old entries p53 entries and so
 spews out a long list of annotation changes. What we are interested in
 is the merging of groups of the same protein at the end of the output.
- 
+
+Model files should be in .csv format.
+
+ UniProt accession, version, other fields...
+
+Other fields are ignored by the parser.
+
 Issues:
 -------
 
@@ -167,4 +164,4 @@ Ideas for future releases
   specify. How do we detect new components to include? We could study
   pathway databases (e.g. KEGG, UniPathway) or use GO.
 
-* Expand to other types of records and databases.
+* Expand to other types of molecule and databases.
