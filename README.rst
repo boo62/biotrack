@@ -65,6 +65,7 @@ Usage:
 
 You can run the script modcomp on the example models provided:
  cd tests/example_models/
+
  modcomp <filename>
 
 Issues:
