@@ -1,22 +1,37 @@
-# Parses a SwissProt.Record.comments from a list to a dictionary which
-# is stored as the attribute field_dict. Provides methods for
-# manipulating, comparing, and printing the fields in the comments
-# attribute of a SwissProt.Record. Alternatively, I could just have a
-# parser method in Component and use dictionaries, or I could
-# look into subclassing the base python dict object.
-class Fields(object):
+"""Class to contain annotation information on a model component."""
 
-    # get comments into a dictionary.
+
+class Fields(object):
+    """Parses a SwissProt.Record.comments from a list to a dictionary.
+
+    Dictionary is stored as the attribute field_dict. Provides methods
+    for manipulating, comparing, and printing the fields.
+    """
+    # Alternatively, I could just have a parser method in Component
+    # and use dictionaries, or I could look into subclassing the base
+    # python dict object.
+    
     def __init__(self, comments=None):
-        # A set of fields so can do comparisions using union and
-        # intersection. Can then give new and old Comments attributes
-        # to Components.
-        # Fields as a dictionary (or nested dictionary).
-        # split(s, sep=":", maxsplit=1)
+        """Parse comments to a dictionary if given.
+
+        Comments is expected in Bio.SwissProt.Records.comments format
+        in order for methods to work.
+        
+        Attributes: 
+        field_dict
+
+        field_dict is a dictionary represtation of a
+        Bio.SwissProt.Records.comments attribute for easier
+        manipulation.
+
+        """
+        # Should raise error if comments is not in expected format.
         if comments is not None:
             self.field_dict = self.parse_comments(comments)
+
             
     def parse_comments(self, comments):
+        """Parse SwissProt.Record.comments to a dictionary."""
         # Keep fields as uppercase in case we want to compare back with
         # UniProt.Record.comments
         comments = [str.split(comment, ":", 1) for comment in comments]
@@ -24,9 +39,9 @@ class Fields(object):
         return dict(comments)
         
 
-    # Compare if the fields of two Fields are equal.
-    # Sets are dicts are both equal.
+
     def __eq__(self, fields2):
+        """Return True if the field_dicts of two Fields are equal."""
         return (self.field_dict == fields2.field_dict)
 
     
@@ -34,10 +49,11 @@ class Fields(object):
     def __sub__(self, other):
         """Return a Fields object containing differences.
 
-        Differences are new fields or changed field values but
-        not removed fields. If there are no differnces returns None.
+        Differences are (currently) new fields or changed field values
+        but not removed fields. If there are no differnces returns
+        None.
+
         """
-        # Do I need to check if other is a Field or let it fail?
         if self == other:
             return None
         else:
@@ -56,7 +72,6 @@ class Fields(object):
             dif = Fields()
             dif.field_dict = updated_dict
             return dif
-
 
     
     def __str__(self):

@@ -74,12 +74,12 @@ class Model(object):
         """Print groups of Components which are the same protein.
 
         Calls the method group_accessions on self and prints either
-        the groups of proteins or a message that none exist.
+        the groups of proteins or a message that no groups exist.
 
         """
         groups = self.group_accessions()
         if groups:
-            print("The following proteins have merged:")
+            print("The following accessions have merged:")
             for group in groups:
                 # Cannot index set and do not know entries so loop and break
                 # after first component to extract a name.
@@ -91,14 +91,14 @@ class Model(object):
                 print(group_name)
                 print(output)
         else:
-            print("No proteins have merged.")        
+            print("No accessions have merged.")        
     
 
     # Should change or create new methods which use GO terms and difflib.
     # SwissProt.Record does not contain GO terms so need other way of
     # getting these.
     def compare_entries(self):
-        """Find differeces in a field between new and old entries.
+        """Find differeces in annotations between new and old entries.
 
         Returns a Fields object containing new and altered fields in
         the comments sections of the Components new_entry and old_entry
@@ -114,19 +114,4 @@ class Model(object):
             print acc
             print name
             print "Updates:"
-            print changes
-
-
-    # Modify compare_entries method to take optional fields
-    # arguments. If no fields given compare all. Return None if field
-    # does not exist in either record.
-    # Should change or create new methods which use GO terms and difflib.
-    def compare_fields(self, *fields):
-        """Find differeces in a field between new and old entries."""
-        for component in self.components:
-            acc = component.accession
-            name = component.new_entry.gene_name
-            changes = component.compare_entry_fields()
-            print acc
-            print name
             print changes

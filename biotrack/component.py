@@ -1,4 +1,4 @@
-# Component class
+"""Classes to represent model components."""
 import re, urllib
 
 from Bio import SwissProt
@@ -19,8 +19,24 @@ class Component(object):
 
 
     def __init__(self, accession, version):
-        # Accession should be in Uniprot format. Version should exist
-        # in UniSave.
+        """Initialize a protein component.
+
+        Attributes:
+        accession
+        version
+        old_entry
+        new_entry
+
+        Accession should be in Uniprot format. Version should be an
+        integer or string representation of an integer and exist in
+        UniSave http://www.ebi.ac.uk/uniprot/unisave/app/#/.
+
+        old_entry and new_entry attributes are None upon instatiation
+        but can be assigned as Bio.SwissProt.Record objects using
+        valid UniProt accessions and entry versions and the methods
+        fetch_old_entry and fetch_new_entry.
+
+        """
         if re.match(self.UNIPROT_ACCESSION, str(accession)) is not None:
             self.accession = str(accession)
         else:
@@ -78,11 +94,13 @@ class Component(object):
 
     
     def fetch_old_entry(self):
+        """Fetch old entry from UniSave."""
         handle = urllib.urlopen(self.OLD_URL.format(self.accession, self.version))
         return SwissProt.read(handle)
 
     
     def fetch_new_entry(self):
+        """Fetch old entry from UniProt."""
         handle = urllib.urlopen(self.NEW_URL.format(self.accession))
         return SwissProt.read(handle)
 
@@ -93,31 +111,6 @@ class Component(object):
         old = Fields(self.old_entry.comments)
         new = Fields(self.new_entry.comments)
         return new - old
-
-
-    # # Comments are in list. Want them as dict.
-    # def dict_comments(self, comments):
-    #     # Keep fields as uppercase in case we want to compare back with
-    #     # UniProt.Record.comments
-    #     comments = [str.split(comment, ":", 1) for comment in comments]
-    #     comments = [(comment[0], str.strip(comment[1])) for comment in comments]
-    #     return dict(comments)
-
-    # def find_updates(self):
-    #     old_comments = self.old_entry.
-    #     new_comments = 
-  
-        
-    # Do diff between a field in new and old entries.
-    def diff_field(self, field):
-        # old = self.old_entry.comments
-        # new = self.new_entry.comments
-        pass
-
-
-    # Greater than of equal based on version number or date. 
-    def __ge__(self, comp2):
-        pass
  
 
 # A Component subclass which automatically retrieves UniProt Entries
@@ -126,6 +119,24 @@ class AutoComponent(Component):
     """Component subclass which retrieves UniProt entries on instantiation."""
 
     def __init__(self, accession, version):
+        """Initialize a protein component.
+
+        Attributes:
+        accession
+        version
+        old_entry
+        new_entry
+
+        Accession should be in Uniprot format. Version should be an
+        integer or string representation of an integer and exist in
+        UniSave http://www.ebi.ac.uk/uniprot/unisave/app/#/.
+
+        Bio.SwissProt.Record objects are automatically retrieved for
+        the old and new version and assigned to the attributes
+        old_entry and new_entry.
+
+        """
+        
         # Call Component (super)  __init__.
         super(AutoComponent, self).__init__(accession, version)
         # Fetch the UniProt entries on instantiation.
