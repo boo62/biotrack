@@ -1,8 +1,7 @@
 MANIFEST.in
-README
+README.rst
 requirements.txt
 setup.py
-setup2.py
 bin/modcomp
 biotrack/__init__.py
 biotrack/component.py

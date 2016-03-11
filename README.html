@@ -373,6 +373,16 @@ use.</li>
 <h1>How to install</h1>
 <p>biotrack is available as a Python package. Istallation requires
 setuptools and is tested for Python 2.7.6 and 2.7.11.</p>
+<p>For the purpose of this assesment I have included the project
+directory used in developments which also contains the .git folder.</p>
+<p>You can either install as</p>
+<blockquote>
+python setup.py develop</blockquote>
+<p>or do</p>
+<blockquote>
+python setup.py sdist</blockquote>
+<p>and then copy the tar.gz produced inside the dist/ to a new location
+and follow the below instructions for a normal install.</p>
 <p>Uncompress the tar.gz file and cd inside it. (If you are reading this
 you probably already have.)</p>
 <p>To run tests before installing</p>
@@ -466,7 +476,9 @@ giving a list of options to the user.</li>
 <li>Django implementation. This could tell the user if any proteins have
 merged and provide links to a UniSave diff comparison for any
 annotation changes.</li>
-<li>Explore options for interfacing with the BioModels database.</li>
+<li>Explore options for interfacing with the BioModels database. These
+have minimum information standards. Can I get the components in the
+correct format from either version numbers or dates?</li>
 <li>It is relatively easy to track changes to known components which we
 specify. How do we detect new components to include? We could study
 pathway databases (e.g. KEGG, UniPathway) or use GO.</li>

@@ -41,6 +41,20 @@ How to install
 biotrack is available as a Python package. Istallation requires
 setuptools and is tested for Python 2.7.6 and 2.7.11.
 
+For the purpose of this assesment I have included the project
+directory used in developments which also contains the .git folder.
+
+You can either install as
+
+  python setup.py develop
+
+or do
+
+  python setup.py sdist
+
+and then copy the tar.gz produced inside the dist/ to a new location
+and follow the below instructions for a normal install.
+
 Uncompress the tar.gz file and cd inside it. (If you are reading this
 you probably already have.)
 
@@ -155,7 +169,9 @@ Ideas for future releases
   merged and provide links to a UniSave diff comparison for any
   annotation changes.
 
-* Explore options for interfacing with the BioModels database.
+* Explore options for interfacing with the BioModels database. These
+  have minimum information standards. Can I get the components in the
+  correct format from either version numbers or dates?
   
 * It is relatively easy to track changes to known components which we
   specify. How do we detect new components to include? We could study

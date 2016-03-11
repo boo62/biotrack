@@ -22,6 +22,6 @@ print("")
 print("Annotation Changes:")
 model.compare_entries()
 print("")
-# Print merged groups of accessoins
+# Print merged groups of accessions
 model.print_groups()
 print("")
