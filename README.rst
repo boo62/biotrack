@@ -49,30 +49,31 @@ Uncompress the tar.gz file and cd inside it. (If you are reading this
 you probably already have.)
 
 To run tests before installing
-    python setup.py test
+ python setup.py test
 
 To install
-    python setup.py install
+ python setup.py install
 
 To see that biotrack (0.1) is installed.
-   pip list
+ pip list
 
 To uninstall.
-   pip uninstall biotrack
+ pip uninstall biotrack
 
 Usage:
 ------
-- You can run the script modcomp on the example models provided:
-cd tests/example_models/
-modcomp <filename>
+
+You can run the script modcomp on the example models provided:
+ cd tests/example_models/
+ modcomp <filename>
 
 Issues:
 
-- Information is spread across different databases and some of these (SubtiWiki)
-  are species specific.
+Information is spread across different databases and some of these (SubtiWiki)
+are species specific.
 
-- Will database stucture have changed between versions so that it is
-  difficult to compare? Merging of entries etc.
+Will database stucture have changed between versions so that it is
+difficult to compare? Merging of entries etc.
 
 
 
@@ -86,7 +87,7 @@ Ideas for future releases:
 --------------------------
 
 - There should be an option to return an updated model file with the
-latest entry versions.
+  latest entry versions.
 
 - It is relatively easy to track changes to known components which we
   specify. How do we detect new components in a pathway? Could study pathway
