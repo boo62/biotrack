@@ -1,5 +1,4 @@
 biopython==1.66
--e git+https://boo62@bitbucket.org/boo62/biotrack.git@2431db7e00ee1768a02555b2035174b535585ecc#egg=biotrack
 numpy==1.10.4
 pandas==0.17.1
 py==1.4.31

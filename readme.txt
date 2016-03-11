@@ -1,4 +1,3 @@
-# I suggest you install inside a virtual environment.
 
 # Uncompress tar file
 tar -zxvf biotrack-0.1.tar.gz

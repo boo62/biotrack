@@ -1,4 +1,4 @@
-include README
+include README.rst
 include requirements.txt
 include tests/example_models/*.csv
 include tests/pickled_testcases/*.txt
