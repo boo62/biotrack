@@ -38,11 +38,10 @@ Description
 How to install
 --------------
 
-biotrack is available as a Python package. Istallation requires
+biotrack can be installed as a Python package. Istallation requires
 setuptools and is tested for Python 2.7.6 and 2.7.11.
 
-For the purpose of this assesment I have included the project
-directory used in developments which also contains the .git folder.
+git clone https://github.com/boo62/biotrack
 
 You can either install as
 
@@ -55,8 +54,7 @@ or do
 and then copy the tar.gz produced inside the dist/ to a new location
 and follow the below instructions for a normal install.
 
-Uncompress the tar.gz file and cd inside it. (If you are reading this
-you probably already have.)
+Uncompress the tar.gz file and cd inside it.
 
 To run tests before installing
 
