@@ -1,45 +1,37 @@
-========
-biotrack
-========
+==================
+biotrack (Python2)
+==================
 
-Track changes in UniProt entries for components of a biological model.
+Track changes to a list of UniProt entries.
 
 The Problem
 -----------
 
-If an author has many models, it may be hard to keep track of the literature for
-all of them, or some of them may be abandoned. An author may revisit a model
-after several years or it may be picked up by another researcher. It would be
-useful to see whether there have been any developments, which might be used to
-revise the model, without having to trawl through databases for all of the
-components.
+Biological databases are under constant revision due to new dicoveries. Biological models often contain tens or hundreds of components (e.g. proteins, metabolites). It would be useful to track updates to model components in a database (or in databases), without having to trawl through entries for each component. This could be particularly useful, if a model is revisted after a long time.
 
 Description
 -----------
 
-* At the time that a component or parameter for a component is used in
-  a model, a user should record the accession and version number of
-  the UniProt entry in a csv file.
+* biotrack will track changes to a list of UniProt entries.
 
-* Given this file, the old and present entries for each component are
-  obtained.
+* When a component, or parameter for a component is used in
+  a model, the modeller should record the accession and version number of
+  the UniProt entry in a csv file. A description can also be added. 
 
-* A comparison is done to see if any of the protein accessions have
-  merged or if there have been any changes to annotations
-  (e.g. function, kinetic parameters, regulation) in the
+* Using the csv file, biotrack obtains the recorded and current version of UniProt entries for each component.
+
+* The new and old versions are compared to see if any of the protein accessions have
+  merged or if annotations
+  (e.g. function, kinetic parameters, regulation) have changed. in the
   SwissProt.Record.components representation of the entries.
 
-* These chages are shown to the user.
-
-* This doesn't necessitate that the components are part of a model
-  (i.e. anything written in SMBL, CellML, etc.,), that is just a suggested
-  use.
+* Chages are displayed to the user.
 
 How to install
 --------------
 
 biotrack can be installed as a Python package. Istallation requires
-setuptools and is tested for Python 2.7.6 and 2.7.11.
+setuptools and should work for Python 2.7.6 or higher.
 
 git clone https://github.com/boo62/biotrack
 
@@ -52,7 +44,7 @@ or do
   python setup.py sdist
 
 and then copy the tar.gz produced inside the dist/ to a new location
-and follow the below instructions for a normal install.
+and follow the below instructions for a normal installation.
 
 Uncompress the tar.gz file and cd inside it.
 
@@ -125,10 +117,10 @@ Issues
 
 * Currently no exception handling for non-existant UniProt entries.
   
-  - Future and non-existant versions will cause a crash.
+  - Future and non-existant versions or entries will cause a crash.
   
-  - It will crash if an accession is in valid UniProt format but does
-    not exist on the database.
+  - It will crash if an accession has a valid UniProt format but does
+    not exist in the database.
 
 
 * Very old entries.
