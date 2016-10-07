@@ -7,7 +7,7 @@ Track changes to a list of UniProt entries.
 The Problem
 -----------
 
-Biological databases are under constant revision due to new discoveries. Biological models often contain tens or hundreds of components (e.g. proteins, metabolites), making it impractical to manually track changes in databases for entire models. It would be save time if updates could be automatically tracked from the date that a model is created. This would be particularly useful if a model is revisted after a long time.
+Biological databases are under constant revision due to new discoveries. Biological models often contain tens or hundreds of components (e.g. proteins and metabolites), making it impractical to manually track changes in databases for entire models. It would be save time if updates could be automatically tracked from the date that a model is created. This would be particularly useful if a model is revisted after a long time.
 
 Description
 -----------
@@ -15,7 +15,7 @@ Description
 * biotrack will track changes to a list of UniProt entries recorded in a csv file.
 
 * When information about a component is used in a model, the modeller should record the accession and version number of
-  the component's UniProt entry in a csv file. A description can also be added (e.g. parameter used, interaction). 
+  the component's UniProt entry in a csv file. A description can also be added (e.g. parameter used, or interaction). 
 
 * Using the csv file, biotrack obtains the recorded and current version of UniProt entries for each component.
 
