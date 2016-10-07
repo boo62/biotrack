@@ -7,7 +7,7 @@ Track changes to a list of UniProt entries.
 The Problem
 -----------
 
-Biological databases are under constant revision due to new discoveries. Biological models often contain tens or hundreds of components (e.g. proteins and metabolites), making it impractical to manually track changes in databases for entire models. It would be save time if updates could be automatically tracked from the date that a model is created. This would be particularly useful if a model is revisted after a long time.
+Biological databases are under constant revision due to new discoveries. Biological models often contain tens or hundreds of components (e.g. proteins and metabolites), making it impractical to manually track changes in databases for entire models. It would save time if updates could be automatically tracked from the date that a model is created. This would be particularly useful if a model is revisted after a long time.
 
 Description
 -----------
