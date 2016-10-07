@@ -12,11 +12,10 @@ Biological databases are under constant revision due to new discoveries. Biologi
 Description
 -----------
 
-* biotrack will track changes to a list of UniProt entries.
+* biotrack will track changes to a list of UniProt entries recorded in a csv file.
 
-* When a component, or parameter for a component is used in
-  a model, the modeller should record the accession and version number of
-  the UniProt entry in a csv file. A description can also be added. 
+* When information about a component is used in a model, the modeller should record the accession and version number of
+  the component's UniProt entry in a csv file. A description can also be added (e.g. parameter used, interaction). 
 
 * Using the csv file, biotrack obtains the recorded and current version of UniProt entries for each component.
 
@@ -67,6 +66,8 @@ To uninstall
 
 Requirements
 ------------
+
+Biopyton
 
 Hopefully the dependencies will be handled in the installation.
 Insallation requires setuptools.
