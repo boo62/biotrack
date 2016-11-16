@@ -29,54 +29,9 @@ Description
 How to install
 --------------
 
-biotrack can be installed as a Python package. Istallation requires
-setuptools and should work for Python 2.7.6 or higher.
-
-git clone https://github.com/boo62/biotrack
-
-You can either install as
-
-  python setup.py develop
-
-or do
-
-  python setup.py sdist
-
-and then copy the tar.gz produced inside the dist/ to a new location
-and follow the below instructions for a normal installation.
-
-Uncompress the tar.gz file and cd inside it.
-
-To run tests before installing
-
-  python setup.py test
-
-To install
+Clone and then install using
 
   python setup.py install
-
-To see that biotrack (0.1) is installed.
- 
-  pip list
-
-To uninstall
-
-  pip uninstall biotrack
-
-
-Requirements
-------------
-
-Biopyton
-
-Hopefully the dependencies will be handled in the installation.
-Insallation requires setuptools.
-
-requirements.txt gives a list of packages used in the development environment.
-
-To install these:
-
- pip intall -r requirements.txt
 
 Run modcomp
 -----------
@@ -84,9 +39,9 @@ Run modcomp
 Once installed you can run the script modcomp on the example models
 provided.
 
- cd tests/example_models/
+  cd tests/example_models/
 
- modcomp <filename>
+  modcomp <filename>
 
 This compares past UniProt entries of proteins in the model file to
 the current entries in the UniProt database. It will tell you whether
@@ -94,24 +49,22 @@ any function annotations have changed or been added, and if so will
 print the new versions of the fields. A check is also performed to see
 if any accessions have merged and if so the groups are printed.
  
-To see examples of both behaviours I suggest you run modcomp on the
-following two example models.
+To see examples of both behaviours run modcomp on the example models
+below.
 
- two_components.csv
-
- two_groups_same_protein.csv
-
-The first model contains two proteins, only one of which has changes.
-
-The second model contains some very old entries p53 entries and so
-spews out a long list of annotation changes. What we are interested in
-is the merging of groups of the same protein at the end of the output.
+  two_components.csv and
+  
+  two_groups_same_protein.csv
+  
+The first contains two proteins, only one of which has changes. The 
+second contains some very old p53 entries and shows the merging of
+accessions at the end of the output.
 
 Model files should be in .csv format.
 
- UniProt accession, version, other fields...
+  UniProt accession, version, other fields...
 
-Other fields are ignored by the parser.
+Other fields are ignored by the parser but useful for comment.
 
 Issues
 ------
@@ -126,46 +79,46 @@ Issues
 
 * Very old entries.
 
+  - Some very old entries are in non-standard format and raise an error
+    when biopython attempts to read them (see e.g.
+    tests/example_models/two_ribE_accessions.csv)
+
+..
   - You cannot use a secodary accession to retrieve a UniSave entry after
-    merging. UniSave entries before merging and the current
+    merging. You can however formUniSave entries before merging and the current
     http://www.uniprot.org/ entry can be retrieved with a secondary
-    accession. TrEMBLE entries will generally parse with
-    SwissProt.read() but I have found an example where a very old ribE
-    entry raises AssertionError: Missing braces. Hopefully UniProt
-    formats are now stable and error free and will parse for anyone
-    beginning to record accessions and versions. The model file
-    containing the failing accession is "two_ribE_accessions.csv".
+    accession.
 
+.. 
+  Ideas for future releases
+  -------------------------
 
-Ideas for future releases
--------------------------
+  * Use difflib to find diffs between fields rather than just spitting
+    out the entire field. Sometimes all that has changed with a field is
+    that a reference has been added.
 
-* Use difflib to find diffs between fields rather than just spitting
-  out the entire field. Sometimes all that has changed with a field is
-  that a reference has been added.
+  * Compare by GO (Gene Ontology). A Bio.SwissProt.Record object does
+    not contain any GO terms. Use an alternative method to retreive
+    these from UniProt.
 
-* Compare by GO (Gene Ontology). A Bio.SwissProt.Record object does
-  not contain any GO terms. Use an alternative method to retreive
-  these from UniProt.
+  * There should be an option to return an updated model file with the
+    latest entry versions.
 
-* There should be an option to return an updated model file with the
-  latest entry versions.
+  * Make it interactive. It should be possible to specify for which
+    fields of the SwissProt.Record.comments list a user wants to view
+    changes. This will require fecthing the records first and then
+    giving a list of options to the user.
 
-* Make it interactive. It should be possible to specify for which
-  fields of the SwissProt.Record.comments list a user wants to view
-  changes. This will require fecthing the records first and then
-  giving a list of options to the user.
+  * Django implementation. This could tell the user if any proteins have
+    merged and provide links to a UniSave diff comparison for any
+    annotation changes.
 
-* Django implementation. This could tell the user if any proteins have
-  merged and provide links to a UniSave diff comparison for any
-  annotation changes.
-
-* Explore options for interfacing with the BioModels database. These
-  have minimum information standards. Can I get the components in the
-  correct format from either version numbers or dates?
+  * Explore options for interfacing with the BioModels database. These
+    have minimum information standards. Can I get the components in the
+    correct format from either version numbers or dates?
   
-* It is relatively easy to track changes to known components which we
-  specify. How do we detect new components to include? We could study
-  pathway databases (e.g. KEGG, UniPathway) or use GO.
+  * It is relatively easy to track changes to known components which we
+    specify. How do we detect new components to include? We could study
+    pathway databases (e.g. KEGG, UniPathway) or use GO.
 
-* Expand to other types of molecule and databases.
+  * Expand to other types of molecule and databases.
