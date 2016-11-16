@@ -31,7 +31,7 @@ How to install
 
 Clone and then install using
 
-  python setup.py install
+    python setup.py install
 
 Run modcomp
 -----------
@@ -39,9 +39,9 @@ Run modcomp
 Once installed you can run the script modcomp on the example models
 provided.
 
-  cd tests/example_models/
+    cd tests/example_models/
 
-  modcomp <filename>
+    modcomp <filename>
 
 This compares past UniProt entries of proteins in the model file to
 the current entries in the UniProt database. It will tell you whether
@@ -52,9 +52,9 @@ if any accessions have merged and if so the groups are printed.
 To see examples of both behaviours run modcomp on the example models
 below.
 
-  two_components.csv and
+   two_components.csv and
   
-  two_groups_same_protein.csv
+   two_groups_same_protein.csv
   
 The first contains two proteins, only one of which has changes. The 
 second contains some very old p53 entries and shows the merging of
@@ -62,7 +62,7 @@ accessions at the end of the output.
 
 Model files should be in .csv format.
 
-  UniProt accession, version, other fields...
+    UniProt accession, version, other fields...
 
 Other fields are ignored by the parser but useful for comment.
 
