@@ -53,7 +53,7 @@ print the new versions of the fields. A check is also performed to see
 if any accessions have merged and if so the groups are printed.
  
 To see examples of both behaviours run modcomp on the example models
-below.
+below:
 
 ::
 
@@ -64,13 +64,13 @@ The first contains two proteins, only one of which has changes. The
 second contains some very old p53 entries and shows the merging of
 accessions at the end of the output.
 
-Model files should be in .csv format.
+Model files should be in .csv format with the following fields:
 
 ::
 
   UniProt accession, version, other fields...
 
-Other fields are ignored by the parser but useful for comment.
+"Other fields" are ignored by the parser but useful for comment.
 
 Issues
 ------
